@@ -11,7 +11,6 @@ import geopandas as gpd
 import warnings
 import random
 
-
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 def get_meteostat_daily(startdate, enddate):
@@ -273,7 +272,7 @@ def UnscheduledModule(startdate, enddate, acc_i, params, road_length, user_input
 # Simulation parameters
 
 # Roads
-road = 'DATA/OneSweepingSegement.shp'
+road = 'DATA/OneSweepingSegment.shp'
 
 # Read the shapefile
 road_gdf = gpd.read_file(road)
@@ -309,9 +308,11 @@ df = RainThresholdModule(startdate, enddate, 0, [C1, C2, C3, C4], road_length_ft
 df = AccumulationModule(startdate, enddate, 0, [C1, C2, C3, C4], road_length_ft, accumulation_cutoff, rem_eff)
 df = DefinedIntervalModule(startdate, enddate, 0, [C1, C2, C3, C4], road_length_ft, defined_interval, rem_eff)
 df = UnscheduledModule(startdate, enddate, 0, [C1, C2, C3, C4], road_length_ft, unschduled_sweeping, rem_eff)
+
+# Print the results
 print(df.to_string())
 
-# plot the results
+# PLOTTING!
 fig, ax = plt.subplots(figsize=(10, 4))
 
 ax.set_facecolor('whitesmoke')
@@ -333,59 +334,3 @@ ax.spines['bottom'].set_zorder(10)
 
 plt.tight_layout()
 plt.show()
-
-
-
-# Simulation of buildup and washoff for a road segment
-
-
-
-''''
-dates = pd.date_range(start=startdate, end=enddate, freq='D')
-# Initialize lists to store results
-buildup_results = []
-washoff_results = []
-# Run the simulation for each day
-
-for i, t in enumerate(range(len(dates))):
-    # Calculate buildup
-    B_i = lulc_buildup_function(acc_i, t, params['C1'], params['C2'], road_length_ft)
-    buildup_results.append(B_i)
-
-    # Calculate washoff
-    if i < len(rain_in):
-        W_i = washoff_function(B_i, params, rain_in[i])
-        washoff_results.append(W_i)
-        acc_i = max(0, B_i - W_i)  # update accumulation
-    else:
-        washoff_results.append(0)  # no rain means no washoff
-        acc_i = B_i
-    # Print progress
-    if (i + 1) % 30 == 0:
-        print(f"Processed {i + 1} days out of {len(dates)}")
-# Create a DataFrame to store the results
-results_df = pd.DataFrame({
-    'Date': dates,
-    'Buildup': buildup_results,
-    'Washoff': washoff_results
-})
-
-# Print the results
-print("Simulation results:")
-print(results_df)
-# Plot the results
-plt.figure(figsize=(12, 6))
-plt.plot(results_df['Date'], results_df['Buildup'], label='Buildup', color='blue')
-plt.plot(results_df['Date'], results_df['Washoff'], label='Washoff', color='orange')
-plt.title('Buildup and Washoff Simulation Results')
-plt.xlabel('Date')
-plt.ylabel('Accumulation (ft)')
-plt.xticks(rotation=45)
-plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
-plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=30))
-plt.legend()
-plt.tight_layout()
-# plt.savefig('DATA/simulation_plot.png', dpi=300)
-plt.show()
-
-'''
