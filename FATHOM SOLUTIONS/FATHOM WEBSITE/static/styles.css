@@ -46,6 +46,73 @@ a:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible {
   margin: 0 auto;
 }
 
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100svh;              /* full screen height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: #fff;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #0f1a20 0%, #11242f 50%, #0e1a22 100%);
+  z-index: 0;
+}
+
+.hero-center {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-center img {
+  max-width: 720px;
+  margin-bottom: 20px;
+}
+
+.hero-center h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 3vw + 1rem, 3.2rem);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.85);
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: .8rem;
+  opacity: .9;
+}
+
+.scroll-hint::after {
+  content: "▾";
+  display: block;
+  text-align: center;
+  margin-top: 6px;
+  animation: bob 1.4s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(4px); }
+}
+
+
 /* ===== Sections ===== */
 .section {
   /* Full viewport height minus the sticky header */
