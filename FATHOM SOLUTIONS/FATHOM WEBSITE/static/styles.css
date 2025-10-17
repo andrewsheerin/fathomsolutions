@@ -1,0 +1,454 @@
+/* ===== Design Tokens ===== */
+:root {
+  --c-header: #AFC6D4;
+  --c-cta: #002946;
+  --c-dark-bg: #1b2b34;
+  --c-light-bg: #e8f0f5;
+  --c-text-light: #ffffff;
+  --c-text-dark: #002946;
+  --radius: 6px;
+
+  /* NEW: header height + scroll padding */
+  --header-h: 80px;
+  scroll-padding-top: var(--header-h);
+}
+
+/* Make header stay visible while scrolling */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--header-h);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  scroll-snap-type: y proximity;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f9fb;
+  color: var(--c-text-dark);
+  line-height: 1.6;
+}
+
+h1, h2 { font-weight: 700; margin: 0 0 12px; }
+p { margin: 0 0 12px; }
+
+a { color: inherit; text-decoration: none; }
+a:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible {
+  outline: 3px solid rgba(0, 41, 70, 0.5);
+  outline-offset: 2px;
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+/* ===== Sections ===== */
+.section {
+  /* Full viewport height minus the sticky header */
+  min-height: calc(100svh - var(--header-h));
+  display: grid;
+  place-items: center;   /* vertically centers content nicely */
+  padding: 48px 0;       /* you can keep/adjust your padding */
+  scroll-snap-align: start;
+  scroll-snap-stop: normal; /* change to 'always' if you want stronger snapping */
+}
+
+.section.dark {
+  background-color: --c-dark-bg;           /* will be overridden below */
+  background-color: var(--c-dark-bg);
+  color: var(--c-text-light);
+}
+
+.section.light {
+  background-color: var(--c-light-bg);
+  color: var(--c-text-dark);
+}
+
+/* ===== Header ===== */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 24px;
+  background-color: var(--c-header);
+}
+
+/* Clickable logo container */
+.site-header .logo a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Fancy animated underline on the brand text */
+.site-header .logo span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--c-cta);           /* #002946 */
+  text-transform: uppercase;
+  line-height: 1.8;
+
+  /* underline as a background that animates */
+  background-image: linear-gradient(90deg, var(--c-cta), #00aaff);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 3px;       /* hidden initially */
+  transition: background-size 0.35s ease;
+}
+
+/* expand the underline on hover */
+.site-header .logo a:hover span {
+  background-size: 100% 3px;
+}
+
+.site-header .logo img {
+  height: 65px;
+}
+
+
+/* Navigation Styling */
+.site-header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 28px;          /* wider spacing */
+  margin: 0;
+  padding: 0;
+}
+
+.site-header nav a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--c-cta);          /* dark blue #002946 */
+  padding: 6px 4px;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* Hover effect: subtle underline animation */
+.site-header nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: var(--c-cta);
+  transition: width 0.3s ease;
+}
+
+.site-header nav a:hover {
+  color: #000; /* a little darker */
+}
+
+.site-header nav a:hover::after {
+  width: 100%;
+}
+
+
+/* ===== Buttons ===== */
+.btn-primary,
+.btn-secondary {
+  font-family: 'Montserrat', sans-serif;
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  transition: transform 0.08s ease, filter 0.08s ease;
+  will-change: transform, filter;
+}
+
+.btn-primary {
+  background-color: var(--c-cta);
+  color: #fff;
+}
+
+.btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: var(--c-cta);
+  border: 2px solid var(--c-cta);
+}
+
+.btn-secondary:hover { background-color: #f6fbff; transform: translateY(-1px); }
+
+/* ===== Profile ===== */
+.profile {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  max-width: 720px;
+  margin: 28px auto 0;
+  text-align: left;
+}
+
+.profile img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.25);
+}
+
+/* ===== Lists ===== */
+.solutions-list,
+.resources-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px auto 0;
+  max-width: 720px;
+  text-align: left;
+}
+
+.solutions-list li,
+.resources-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.section.dark .solutions-list li,
+.section.dark .resources-list li {
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+/* Solutions Section */
+.solutions-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1100px;   /* keeps cards a bit wider but not full edge-to-edge */
+  margin: 0 auto;
+}
+
+/* Tagline */
+.section-lead {
+  text-align: center;
+}
+.section-lead h1 {
+  margin-bottom: 8px;
+}
+.lead-sub {
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* Grid of solution cards */
+.solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Cards */
+.solution-card {
+  background: #ffffff;
+  color: var(--c-text-dark);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.solution-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Icons */
+.solution-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--c-cta);
+  margin-bottom: 16px;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .solutions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* --- Projects: tall cards + big hover growth, no horizontal scroll --- */
+
+.projects-section {
+  padding-top: 48px;
+  padding-bottom: 0;
+  overflow: hidden; /* prevents any hover growth from creating scrollbars */
+}
+
+.projects-lead {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.projects-grid {
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;                 /* no gaps between boxes */
+  overflow: hidden;       /* belt + suspenders */
+}
+
+/* Taller base height so the grid feels substantial (2 rows visible on desktop) */
+.project-card {
+  position: relative;
+  height: clamp(260px, 34vh, 420px); /* ↑ taller base */
+  overflow: hidden;
+  background: #0f1a20;
+  color: var(--c-text-light);
+  will-change: transform;
+  transform: translateZ(0);          /* enable GPU compositing */
+  transition: transform 0.28s ease, box-shadow 0.28s ease, outline 0.2s ease;
+  outline: 0 solid transparent;
+  z-index: 0;
+}
+
+/* Subtle gradients per project */
+.project-card[data-project="swpt"]  { background: linear-gradient(135deg, #0f1a20 0%, #123042 100%); }
+.project-card[data-project="lca"]   { background: linear-gradient(135deg, #0f1a20 0%, #1a3e4f 100%); }
+.project-card[data-project="wind"]  { background: linear-gradient(135deg, #0f1a20 0%, #224a5c 100%); }
+.project-card.project-github        { background: linear-gradient(135deg, #0f1a20 0%, #2b5667 100%); }
+
+/* BIG hover growth without horizontal scroll (container hides overflow) */
+.project-card:hover,
+.project-card:focus-within,
+.project-card.active {
+  transform: scale(1.1);           /* “grow a ton” */
+  box-shadow: 0 22px 60px rgba(0,0,0,0.42);
+  outline: 2px solid rgba(255,255,255,0.14);
+  z-index: 2;                       /* float above neighbors */
+}
+
+/* Inner layout */
+.project-inner {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 28px 18px;
+}
+
+.project-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.05rem, 1.2vw + 0.9rem, 1.4rem);
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Reveal content */
+.project-reveal {
+  max-width: 680px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.project-card:hover .project-title,
+.project-card:focus-within .project-title,
+.project-card.active .project-title {
+  transform: translateY(-3px);
+}
+
+.project-card:hover .project-reveal,
+.project-card:focus-within .project-reveal,
+.project-card.active .project-reveal {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.project-reveal .btn-primary,
+.project-reveal .btn-secondary {
+  margin-top: 12px;
+}
+
+/* --- Responsive --- */
+
+/* Large tablets: 2 columns, keep presence */
+@media (max-width: 1100px) and (min-width: 601px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-card  { height: clamp(260px, 36vh, 460px); }
+}
+
+/* Mobile: 1 column, still tall; scale reduced for comfort */
+@media (max-width: 600px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card  { height: clamp(260px, 44vh, 520px); }
+  .project-card:hover,
+  .project-card:focus-within,
+  .project-card.active {
+    transform: scale(1.08);  /* softer growth on small screens */
+  }
+}
+
+
+
+
+
+/* ===== Footer ===== */
+.site-footer {
+  background-color: var(--c-header);
+  color: var(--c-cta);
+  padding: 28px 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.site-footer .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-footer .logo img {
+  height: 56px;
+}
+
+.footer-note { margin-top: 6px; opacity: 0.85; }
+
+.footer-contact a { text-decoration: underline; }
+
+/* ===== Responsiveness ===== */
+@media (max-width: 600px) {
+  .site-header .logo span {
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+  }
+}
+
+  .site-header nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .profile {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-cta { margin-top: 8px; }
+}
