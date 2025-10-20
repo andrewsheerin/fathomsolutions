@@ -1,42 +1,47 @@
 /* ===== Design Tokens ===== */
 :root {
   --c-header: #AFC6D4;
-  --c-cta: #002946;
+  --c-cta: #AFC6D4;
   --c-dark-bg: #1b2b34;
   --c-light-bg: #e8f0f5;
   --c-text-light: #ffffff;
   --c-text-dark: #002946;
   --radius: 6px;
 
-  /* NEW: header height + scroll padding */
-  --header-h: 80px;
+  --header-h: 90px;                 /* larger desktop header height */
   scroll-padding-top: var(--header-h);
 }
 
-/* Make header stay visible while scrolling */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  height: var(--header-h);
+* {
+  box-sizing: border-box;
 }
-
-* { box-sizing: border-box; }
 
 body {
-  scroll-snap-type: y proximity;
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  background-color: #f5f9fb;
+  background: #f5f9fb;
   color: var(--c-text-dark);
   line-height: 1.6;
+  scroll-snap-type: y proximity;
 }
 
-h1, h2 { font-weight: 700; margin: 0 0 12px; }
-p { margin: 0 0 12px; }
+h1, h2 {
+  font-weight: 700;
+  margin: 0 0 12px;
+}
 
-a { color: inherit; text-decoration: none; }
-a:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible {
+p {
+  margin: 0 0 12px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
   outline: 3px solid rgba(0, 41, 70, 0.5);
   outline-offset: 2px;
 }
@@ -46,16 +51,17 @@ a:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible {
   margin: 0 auto;
 }
 
-/* Hero Section */
+/* ===== Hero Section ===== */
 .hero {
   position: relative;
-  height: 100svh;              /* full screen height */
+  height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   text-align: center;
   color: #fff;
+  scroll-snap-align: start;
 }
 
 .hero-bg {
@@ -71,32 +77,23 @@ a:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible {
 }
 
 .hero-center img {
-  max-width: 720px;
+  width: clamp(200px, 45vw, 800px);   /* scale bigger on all screens */
+  height: auto;
   margin-bottom: 20px;
 }
 
-.hero-center h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: clamp(2rem, 3vw + 1rem, 3.2rem);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #fff;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-}
-
-/* Scroll hint */
 .scroll-hint {
   position: absolute;
   left: 50%;
   bottom: 28px;
   transform: translateX(-50%);
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  font-size: .8rem;
-  opacity: .9;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  cursor: pointer;
 }
 
 .scroll-hint::after {
@@ -108,245 +105,235 @@ a:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible {
 }
 
 @keyframes bob {
-  0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(4px); }
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(4px); }
 }
-
 
 /* ===== Sections ===== */
 .section {
-  /* Full viewport height minus the sticky header */
   min-height: calc(100svh - var(--header-h));
   display: grid;
-  place-items: center;   /* vertically centers content nicely */
-  padding: 48px 0;       /* you can keep/adjust your padding */
+  place-items: center;
+  padding: 48px 0;
   scroll-snap-align: start;
-  scroll-snap-stop: normal; /* change to 'always' if you want stronger snapping */
+  scroll-snap-stop: always;
 }
 
 .section.dark {
-  background-color: --c-dark-bg;           /* will be overridden below */
-  background-color: var(--c-dark-bg);
+  background: var(--c-dark-bg);
   color: var(--c-text-light);
 }
 
 .section.light {
-  background-color: var(--c-light-bg);
+  background: var(--c-light-bg);
   color: var(--c-text-dark);
 }
 
-/* ===== Header ===== */
+#about, #solutions, #projects {
+  scroll-margin-top: 2px; /* ensures header activates immediately */
+}
+
+/* ===== Header (desktop) ===== */
 .site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--header-h);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 24px 24px;
-  background-color: var(--c-header);
+  gap: 28px;
+  padding: 16px 24px;
+  background: transparent;
+  transform: translateY(-100%);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+  border-bottom: 2px solid var(--c-cta);
 }
 
-/* Clickable logo container */
-.site-header .logo a {
+.header-visible .site-header {
+  transform: translateY(0);
+  background: var(--c-dark-bg);
+}
+
+.compact-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: inherit;
-  text-decoration: none;
+  gap: 12px;
+  color: var(--c-text-light);
 }
 
-/* Fancy animated underline on the brand text */
-.site-header .logo span {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--c-cta);           /* #002946 */
-  text-transform: uppercase;
-  line-height: 1.8;
-
-  /* underline as a background that animates */
-  background-image: linear-gradient(90deg, var(--c-cta), #00aaff);
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 3px;       /* hidden initially */
-  transition: background-size 0.35s ease;
+.compact-brand img {
+  height: 70px;   /* bigger desktop logo */
+  width: auto;
 }
 
-/* expand the underline on hover */
-.site-header .logo a:hover span {
-  background-size: 100% 3px;
-}
-
-.site-header .logo img {
-  height: 65px;
-}
-
-
-/* Navigation Styling */
-.site-header nav ul {
+.site-header .site-nav ul {
   list-style: none;
   display: flex;
-  gap: 28px;          /* wider spacing */
+  gap: 28px;
   margin: 0;
   padding: 0;
 }
 
-.site-header nav a {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--c-cta);          /* dark blue #002946 */
-  padding: 6px 4px;
+.site-header .site-nav a {
   position: relative;
-  transition: color 0.2s ease;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--c-text-light);
+  padding: 6px 4px;
 }
 
-/* Hover effect: subtle underline animation */
-.site-header nav a::after {
+.site-header .site-nav a::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: -4px;
   width: 0;
   height: 2px;
-  background-color: var(--c-cta);
-  transition: width 0.3s ease;
+  background: var(--c-text-light);
+  transition: width 0.25s ease;
 }
 
-.site-header nav a:hover {
-  color: #000; /* a little darker */
-}
-
-.site-header nav a:hover::after {
+.site-header .site-nav a:hover::after {
   width: 100%;
 }
 
+.site-cta {
+  margin-left: auto;
+}
+
+/* ===== Header (mobile) ===== */
+@media (max-width: 720px) {
+  .site-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 92px;             /* taller mobile header */
+    padding: 5px 5px;
+  }
+
+  .compact-brand {
+    justify-content: center;
+  }
+
+  .compact-brand img {
+    height: 80px;             /* bigger mobile logo */
+  }
+
+  .site-header .site-nav,
+  .site-header .site-cta {
+    display: none;
+  }
+}
 
 /* ===== Buttons ===== */
 .btn-primary,
 .btn-secondary {
   font-family: 'Montserrat', sans-serif;
   display: inline-block;
-  padding: 10px 18px;
+  padding: 12px 22px;
   border-radius: var(--radius);
   transition: transform 0.08s ease, filter 0.08s ease;
   will-change: transform, filter;
 }
 
 .btn-primary {
-  background-color: var(--c-cta);
-  color: #fff;
+  background: var(--c-cta);
+  color: var(--c-text-dark);
 }
 
-.btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.btn-primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
 
 .btn-secondary {
-  background-color: #ffffff;
+  background: #ffffff;
   color: var(--c-cta);
   border: 2px solid var(--c-cta);
 }
 
-.btn-secondary:hover { background-color: #f6fbff; transform: translateY(-1px); }
+.btn-secondary:hover {
+  background: #f6fbff;
+  transform: translateY(-1px);
+}
 
 /* ===== Profile ===== */
 .profile {
   display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 20px;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
   align-items: center;
-  justify-content: center;
   max-width: 720px;
   margin: 28px auto 0;
   text-align: left;
 }
 
 .profile img {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid rgba(255,255,255,0.25);
+  border: 3px solid rgba(255, 255, 255, 0.25);
 }
 
-/* ===== Lists ===== */
-.solutions-list,
-.resources-list {
-  list-style: none;
-  padding: 0;
-  margin: 16px auto 0;
-  max-width: 720px;
-  text-align: left;
-}
-
-.solutions-list li,
-.resources-list li {
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-
-.section.dark .solutions-list li,
-.section.dark .resources-list li {
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-}
-/* Solutions Section */
+/* ===== Solutions ===== */
 .solutions-wrap {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  max-width: 1100px;   /* keeps cards a bit wider but not full edge-to-edge */
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-/* Tagline */
 .section-lead {
   text-align: center;
 }
+
 .section-lead h1 {
   margin-bottom: 8px;
 }
+
 .lead-sub {
   opacity: 0.8;
   margin: 0;
 }
 
-/* Grid of solution cards */
 .solutions-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-/* Cards */
 .solution-card {
-  background: #ffffff;
+  background: #fff;
   color: var(--c-text-dark);
   border-radius: var(--radius);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  padding: 32px 24px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  padding: 36px 28px;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .solution-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* Icons */
 .solution-icon {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   color: var(--c-cta);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
-/* Responsive */
 @media (max-width: 860px) {
   .solutions-grid {
     grid-template-columns: 1fr;
   }
 }
-/* --- Projects: tall cards + big hover growth, no horizontal scroll --- */
+
+/* ===== Projects (same structure, hover growth) ===== */
 
 .projects-section {
   padding-top: 48px;
@@ -462,13 +449,9 @@ a:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible {
   }
 }
 
-
-
-
-
 /* ===== Footer ===== */
 .site-footer {
-  background-color: var(--c-header);
+  background: var(--c-header);
   color: var(--c-cta);
   padding: 28px 0;
 }
@@ -487,26 +470,19 @@ a:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible {
 }
 
 .site-footer .logo img {
-  height: 56px;
+  height: 64px; /* bigger footer logo too */
 }
 
-.footer-note { margin-top: 6px; opacity: 0.85; }
+.footer-note {
+  margin-top: 6px;
+  opacity: 0.85;
+}
 
-.footer-contact a { text-decoration: underline; }
+.footer-contact a {
+  text-decoration: underline;
+}
 
-/* ===== Responsiveness ===== */
 @media (max-width: 600px) {
-  .site-header .logo span {
-    font-size: 1.2rem;
-    letter-spacing: 0.5px;
-  }
-}
-
-  .site-header nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
   .profile {
     grid-template-columns: 1fr;
     text-align: center;
@@ -517,5 +493,7 @@ a:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible {
     text-align: center;
   }
 
-  .footer-cta { margin-top: 8px; }
+  .footer-cta {
+    margin-top: 8px;
+  }
 }

@@ -8,11 +8,10 @@
   <link rel="stylesheet" href="../static/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
 <body id="top">
 
-   <!-- HERO (big logo in center, stays centered) -->
+  <!-- HERO (big logo centered) -->
   <section id="hero" class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
 
@@ -20,26 +19,27 @@
       <img src="../static/images/inset_O_logo_white.png" alt="Fathom Solutions Logo" />
     </div>
 
-    <div class="scroll-hint" aria-hidden="true">Learn more</div>
+    <a href="#about" class="scroll-hint">Learn more</a>
   </section>
 
+  <!-- HEADER (hidden on hero, shows after hero) -->
+  <header class="site-header" role="banner" aria-label="Site header">
+    <a href="#top" class="compact-brand" aria-label="Fathom Solutions">
+      <img src="../static/images/outside_logo_white.png" alt="Fathom Solutions Logo" />
+    </a>
 
-  <!-- COMPACT HEADER (hidden until you scroll past hero) -->
-<!--  <header class="compact-header" role="banner" aria-label="Site header">-->
-<!--    <a href="#top" class="compact-brand">-->
-<!--      <img src="../static/images/logo_V3.png" alt="Fathom Solutions Logo" />-->
-<!--      <span>Fathom Solutions</span>-->
-<!--    </a>-->
-<!--    <nav aria-label="Primary">-->
-<!--      <ul>-->
-<!--        <li><a href="#about">About</a></li>-->
-<!--        <li><a href="#solutions">Solutions</a></li>-->
-<!--        <li><a href="#projects">Projects</a></li>-->
-<!--      </ul>-->
-<!--    </nav>-->
-<!--    <a href="https://calendly.com/asheerin/meeting" target="_blank" class="btn-primary">Schedule a Meeting</a>-->
-<!--  </header>-->
+    <!-- Desktop nav -->
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#solutions">SOLUTIONS</a></li>
+        <li><a href="#projects">PROJECTS</a></li>
+      </ul>
+    </nav>
 
+    <!-- Desktop CTA -->
+    <a href="https://calendly.com/asheerin97/30min" target="_blank" class="btn-primary site-cta">Schedule a Meeting</a>
+  </header>
 
   <!-- About -->
   <section id="about" class="section dark">
@@ -62,105 +62,98 @@
     </div>
   </section>
 
-<!-- Solutions -->
-<section id="solutions" class="section light">
-  <div class="container solutions-wrap">
-    <header class="section-lead">
-      <h1>Solutions We Deliver</h1>
-      <p class="lead-sub">Practical expertise to move projects from data to decision.</p>
+  <!-- Solutions -->
+  <section id="solutions" class="section light">
+    <div class="container solutions-wrap">
+      <header class="section-lead">
+        <h1>Solutions We Deliver</h1>
+        <p class="lead-sub">Practical expertise to move projects from data to decision.</p>
+      </header>
+
+      <div class="solutions-grid">
+        <article class="solution-card">
+          <i data-lucide="bar-chart-3" class="solution-icon"></i>
+          <h3>Data Analytics</h3>
+          <p>Turn complex datasets into clear, actionable insights for planning and policy.</p>
+        </article>
+
+        <article class="solution-card">
+          <i data-lucide="map" class="solution-icon"></i>
+          <h3>GIS Specialist</h3>
+          <p>Spatial analysis, mapping, and geoprocessing to understand place-based impacts.</p>
+        </article>
+
+        <article class="solution-card">
+          <i data-lucide="layout-dashboard" class="solution-icon"></i>
+          <h3>Web-App Development</h3>
+          <p>Lightweight, purpose-built tools that put your data to work for stakeholders.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section dark projects-section">
+    <header class="section-lead projects-lead">
+      <h1>Projects</h1>
+      <p class="lead-sub">Selected tools and repositories we’re building.</p>
     </header>
 
-    <div class="solutions-grid">
-      <article class="solution-card">
-        <i data-lucide="bar-chart-3" class="solution-icon"></i>
-        <h3>Data Analytics</h3>
-        <p>Turn complex datasets into clear, actionable insights for planning and policy.</p>
+    <div class="projects-grid" aria-label="Project list">
+      <article class="project-card" data-project="swpt" tabindex="0">
+        <div class="project-inner">
+          <h3 class="project-title">SWPT</h3>
+          <div class="project-reveal">
+            <p>
+              A streamlined workflow and performance toolkit for sustainability work—templates,
+              data flows, and evaluation steps you can trust.
+            </p>
+            <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
+          </div>
+        </div>
       </article>
 
-      <article class="solution-card">
-        <i data-lucide="map" class="solution-icon"></i>
-        <h3>GIS Specialist</h3>
-        <p>Spatial analysis, mapping, and geoprocessing to understand place-based impacts.</p>
+      <article class="project-card" data-project="lca" tabindex="0">
+        <div class="project-inner">
+          <h3 class="project-title">LCA Pave</h3>
+          <div class="project-reveal">
+            <p>
+              Life-cycle assessment tooling for pavements—compare materials, costs, and impacts
+              across scenarios with transparent assumptions.
+            </p>
+            <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
+          </div>
+        </div>
       </article>
 
-      <article class="solution-card">
-        <i data-lucide="layout-dashboard" class="solution-icon"></i>
-        <h3>Web-App Development</h3>
-        <p>Lightweight, purpose-built tools that put your data to work for stakeholders.</p>
+      <article class="project-card" data-project="wind" tabindex="0">
+        <div class="project-inner">
+          <h3 class="project-title">Wind App</h3>
+          <div class="project-reveal">
+            <p>
+              Lightweight wind resource viewer—map layers, quick stats, and exportable summaries
+              to accelerate site screening.
+            </p>
+            <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card project-github" data-project="github" tabindex="0">
+        <div class="project-inner">
+          <h3 class="project-title">GitHub Repositories</h3>
+          <div class="project-reveal">
+            <p>
+              Explore our public code—experiments, utilities, and app starters that power our projects.
+            </p>
+            <a class="btn-primary" href="https://github.com/andrewsheerin" target="_blank" rel="noopener">View GitHub</a>
+          </div>
+        </div>
       </article>
     </div>
-  </div>
-</section>
+  </section>
 
-
-
-<!-- Projects -->
-<section id="projects" class="section dark projects-section">
-  <header class="section-lead projects-lead">
-    <h1>Projects</h1>
-    <p class="lead-sub">Selected tools and repositories we’re building.</p>
-  </header>
-
-  <div class="projects-grid" aria-label="Project list">
-    <!-- SWPT -->
-    <article class="project-card" data-project="swpt" tabindex="0">
-      <div class="project-inner">
-        <h3 class="project-title">SWPT</h3>
-        <div class="project-reveal">
-          <p>
-            A streamlined workflow and performance toolkit for sustainability work—templates,
-            data flows, and evaluation steps you can trust.
-          </p>
-          <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- LCA Pave -->
-    <article class="project-card" data-project="lca" tabindex="0">
-      <div class="project-inner">
-        <h3 class="project-title">LCA Pave</h3>
-        <div class="project-reveal">
-          <p>
-            Life-cycle assessment tooling for pavements—compare materials, costs, and impacts
-            across scenarios with transparent assumptions.
-          </p>
-          <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Wind App -->
-    <article class="project-card" data-project="wind" tabindex="0">
-      <div class="project-inner">
-        <h3 class="project-title">Wind App</h3>
-        <div class="project-reveal">
-          <p>
-            Lightweight wind resource viewer—map layers, quick stats, and exportable summaries
-            to accelerate site screening.
-          </p>
-          <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- GitHub Repos -->
-    <article class="project-card project-github" data-project="github" tabindex="0">
-      <div class="project-inner">
-        <h3 class="project-title">GitHub Repositories</h3>
-        <div class="project-reveal">
-          <p>
-            Explore our public code—experiments, utilities, and app starters that power our projects.
-          </p>
-          <a class="btn-primary" href="https://github.com/andrewsheerin" target="_blank" rel="noopener">View GitHub</a>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
-
-
-  <!-- Footer / Contact target -->
+  <!-- Footer -->
   <footer id="contact" class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
@@ -187,9 +180,7 @@
   </footer>
 
   <script src="../static/script.js"></script>
-    <!-- Lucide icons script -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-  lucide.createIcons();</script>
+  <script>lucide.createIcons();</script>
 </body>
 </html>

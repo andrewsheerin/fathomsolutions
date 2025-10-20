@@ -1,47 +1,63 @@
-// Smooth scroll for navigation
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function (e) {
+/* ========= Smooth scroll for in-page anchors ========= */
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", (e) => {
+    const href = anchor.getAttribute("href");
+    if (!href || href === "#" || href.startsWith("#!")) return;
+    const target = document.querySelector(href);
+    if (!target) return;
     e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth"
-    });
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 });
 
-// Prevent accidental horizontal scroll on touch while interacting with cards
-document.querySelectorAll('.project-card').forEach((card) => {
-  card.addEventListener('touchmove', (e) => {
-    if (Math.abs(e.touches[0].clientX - (card._touchX ?? 0)) > 8) {
-      e.preventDefault();
-    }
-  }, { passive: false });
-
-  card.addEventListener('touchstart', (e) => {
-    card._touchX = e.touches[0].clientX;
-  });
-});
-
-
-// HERO: when the hero leaves the viewport, "dock" the brand to the corner and show the header
-(function() {
-  const root = document.documentElement;
-  const sentinel = document.getElementById('hero-sentinel');
-  if (!sentinel) return;
+/* ========= Header visibility: show only when the hero is OUT of view =========
+   - While any part of the hero is visible => hide header
+   - Once hero is not visible => show header (and keep it shown for all sections)
+*/
+(function () {
+  const root = document.body;
+  const hero = document.getElementById("hero");
+  if (!hero) return;
 
   const io = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        // When sentinel is NOT visible (hero scrolled past), add class
-        if (!entry.isIntersecting) {
-          root.classList.add('hero-docked');
-        } else {
-          root.classList.remove('hero-docked');
-        }
-      });
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        // Still seeing the hero → hide header
+        root.classList.remove("header-visible");
+      } else {
+        // Hero is out of view → show header
+        root.classList.add("header-visible");
+      }
     },
-    { rootMargin: "-20% 0px 0px 0px", threshold: 0 }
+    {
+      threshold: 0.20,              // flip as soon as intersection changes
+      rootMargin: "0px 0px 0px 0px" // treat hero as visible until it's ~fully gone
+    }
   );
-
-  io.observe(sentinel);
+  io.observe(hero);
 })();
 
+/* ========= Optional: small touch guard to avoid sideways scroll on project cards ========= */
+document.querySelectorAll(".project-card").forEach((card) => {
+  card.addEventListener(
+    "touchstart",
+    (e) => {
+      card._touchX = e.touches[0].clientX;
+    },
+    { passive: true }
+  );
+
+  card.addEventListener(
+    "touchmove",
+    (e) => {
+      const dx = Math.abs(e.touches[0].clientX - (card._touchX ?? 0));
+      if (dx > 8) e.preventDefault();
+    },
+    { passive: false }
+  );
+});
+
+/* ========= Initialize Lucide if present ========= */
+if (window.lucide && typeof window.lucide.createIcons === "function") {
+  window.lucide.createIcons();
+}
