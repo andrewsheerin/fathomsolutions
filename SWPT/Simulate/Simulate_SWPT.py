@@ -64,8 +64,8 @@ print("\nDefined Interval Module Summary:")
 pprint(df3_summary)
 
 
-dfs = [df1, df2, df3]
-titles = ['Baseline: No sweeping', 'Rain Threshold Module: Sweep before >0.8-inch rain event', 'Defined Interval Module: Sweep every 14 days']
+dfs = [df1, df3, df2]
+titles = ['Baseline: No sweeping', 'Defined Interval: Sweep every 14 days', 'Rain Threshold: Sweep before >0.8-inch rain event']
 
 # PLOTTING!
 fig, ax = plt.subplots(nrows=3, sharex=True, sharey=True, figsize=(10, 6))
