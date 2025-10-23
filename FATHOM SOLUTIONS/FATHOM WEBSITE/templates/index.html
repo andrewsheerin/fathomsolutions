@@ -139,7 +139,20 @@
         </div>
       </article>
 
-      <article class="project-card project-github" data-project="github" tabindex="0">
+      <article class="project-card" data-project="CO2" tabindex="0">
+        <div class="project-inner">
+          <h3 class="project-title">CO2 Emissions</h3>
+          <div class="project-reveal">
+            <p>
+              High-resolution CO2 emissions estimator—spatially and temporally explicit based on
+              building energy usage, traffic volume, and tree sequestration rates.
+            </p>
+            <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card" data-project="github" tabindex="0">
         <div class="project-inner">
           <h3 class="project-title">GitHub Repositories</h3>
           <div class="project-reveal">
@@ -153,31 +166,49 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer id="contact" class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <div class="logo">
-          <img src="../static/images/logo_V3.png" alt="Fathom Solutions Logo" />
-          <span>Fathom Solutions</span>
-        </div>
-        <p class="footer-note">Technical solutions for environmental resilience.</p>
-      </div>
+<footer id="contact" class="site-footer">
+  <div class="footer-inner">
+
+    <!-- Brand row -->
+    <a href="#top" class="footer-brand" aria-label="Back to top">
+      <img src="../static/images/logo_V3.png" alt="Fathom Solutions Logo" />
+      <span>Fathom Solutions</span>
+    </a>
+
+    <!-- Divider -->
+    <hr class="footer-sep" aria-hidden="true" />
+
+    <!-- Info grid -->
+    <div class="footer-grid">
+      <p class="footer-tagline">Technical solutions for environmental resilience.</p>
 
       <div class="footer-contact">
-        <p>📞 <a href="tel:+14016266827">401-626-6827</a></p>
-        <p>✉️ <a href="mailto:asheerin97@gmail.com">asheerin97@gmail.com</a></p>
-        <p>
-          <a href="https://linkedin.com/in/asheerin" target="_blank" rel="noopener">LinkedIn</a> ·
-          <a href="https://github.com/andrewsheerin" target="_blank" rel="noopener">GitHub</a>
-        </p>
+        <a href="tel:+14016266827" class="footer-link">401-626-6827</a>
+        <a href="mailto:asheerin97@gmail.com" class="footer-link">asheerin97@gmail.com</a>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <a href="https://linkedin.com/in/asheerin" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+        <a href="https://github.com/andrewsheerin" target="_blank" rel="noopener" class="footer-link">GitHub</a>
       </div>
 
-      <div class="footer-cta">
-        <a href="https://calendly.com/asheerin97/30min" target="_blank" class="btn-primary">Schedule a Meeting</a>
-      </div>
+      <a href="https://calendly.com/asheerin/30min" target="_blank" class="btn-primary footer-cta">
+        Schedule a Meeting
+      </a>
     </div>
-  </footer>
+
+    <!-- Bottom line -->
+    <div class="footer-bottom">
+      <small>© <span id="year"></span> Fathom Solutions. All rights reserved.</small>
+      <a href="#top" class="to-top" aria-label="Back to top">▴</a>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  // update year once (keeps markup clean)
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 
   <script src="../static/script.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
