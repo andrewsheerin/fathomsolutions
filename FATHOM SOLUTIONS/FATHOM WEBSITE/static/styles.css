@@ -8,13 +8,24 @@
   --c-text-dark: #002946;
   --radius: 6px;
 
-  --header-h: 90px;                 /* larger desktop header height */
+  --header-h: 90px;
   scroll-padding-top: var(--header-h);
 }
 
 * {
   box-sizing: border-box;
 }
+
+html, body {
+  overflow-x: hidden;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 
 body {
   margin: 0;
@@ -51,17 +62,16 @@ a:focus-visible,
   margin: 0 auto;
 }
 
-/* ===== Hero Section ===== */
-/* ===== HERO SECTION WITH IMAGE BACKGROUND ===== */
+/* ===== Hero (long scroll, pinned logo) ===== */
 .hero {
   position: relative;
-  height: 200vh;
+  height: 150vh; /* deeper descent */
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  overflow: hidden;
   color: #fff;
   z-index: 1;
 }
@@ -70,13 +80,12 @@ a:focus-visible,
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: url("../static/images/underwater_background.png") center top / cover no-repeat fixed;
-  background-attachment: fixed;
-  filter: brightness(0.4) saturate(1.1);
-  transform: scale(1.05); /* slight zoom for motion comfort */
+  background: url("../static/images/underwater_background.png") center top / cover no-repeat;
+  filter: brightness(0.5) saturate(1.1);
+  transform: scale(1.05);
+  transition: background-position 0.1s linear;
 }
 
-/* Optional subtle fade overlay for legibility */
 .hero-bg::after {
   content: "";
   position: absolute;
@@ -85,23 +94,22 @@ a:focus-visible,
   z-index: 1;
 }
 
-/* The logo stays centered and fixed to viewport */
 .hero-center {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  pointer-events: none; /* prevents interfering with scroll links */
+  pointer-events: none;
+  opacity: 1; /* will fade via JS */
 }
 
 .hero-center img {
-  width: clamp(180px, 40vw, 720px);
+  width: clamp(240px, 80vw, 1000px);
   height: auto;
   filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.6));
 }
 
-/* Scroll hint */
 .scroll-hint {
   position: fixed;
   bottom: 28px;
@@ -112,7 +120,7 @@ a:focus-visible,
   letter-spacing: 0.15em;
   text-transform: uppercase;
   font-size: 0.8rem;
-  opacity: 0.9;
+  opacity: 1; /* will fade via JS */
   z-index: 3;
 }
 
@@ -126,17 +134,13 @@ a:focus-visible,
 
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(4px); }
+  50%      { transform: translateY(4px); }
 }
-
-
-
-
 
 /* ===== Sections ===== */
 .section {
   position: relative;
-  z-order: 5;
+  z-index: 3; /* above hero logo */
   min-height: calc(100svh - var(--header-h));
   display: grid;
   place-items: center;
@@ -156,7 +160,7 @@ a:focus-visible,
 }
 
 #about, #solutions, #projects {
-  scroll-margin-top: 2px; /* ensures header activates immediately */
+  scroll-margin-top: 2px;
 }
 
 /* ===== Header (desktop) ===== */
@@ -188,7 +192,7 @@ a:focus-visible,
 }
 
 .compact-brand img {
-  height: 70px;   /* bigger desktop logo */
+  height: 70px;
   width: auto;
 }
 
@@ -228,14 +232,14 @@ a:focus-visible,
   margin-left: auto;
 }
 
-/* ===== Header (mobile) ===== */
+/* ===== Header (mobile: logo only) ===== */
 @media (max-width: 720px) {
   .site-header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 92px;             /* taller mobile header */
-    padding: 5px 5px;
+    height: 80px;
+    padding: 10px 12px;
   }
 
   .compact-brand {
@@ -243,7 +247,7 @@ a:focus-visible,
   }
 
   .compact-brand img {
-    height: 80px;             /* bigger mobile logo */
+    height: 60px;
   }
 
   .site-header .site-nav,
@@ -359,12 +363,11 @@ a:focus-visible,
   }
 }
 
-/* ===== Projects (same structure, hover growth) ===== */
-
+/* ===== Projects ===== */
 .projects-section {
   padding-top: 48px;
   padding-bottom: 0;
-  overflow: hidden; /* prevents any hover growth from creating scrollbars */
+  overflow: hidden;
 }
 
 .projects-lead {
@@ -377,42 +380,54 @@ a:focus-visible,
   margin: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;                 /* no gaps between boxes */
-  overflow: hidden;       /* belt + suspenders */
+  gap: 0;
+  overflow: hidden;
 }
 
-/* Taller base height so the grid feels substantial (2 rows visible on desktop) */
 .project-card {
   position: relative;
-  height: clamp(260px, 34vh, 420px); /* ↑ taller base */
+  height: clamp(260px, 34vh, 420px);
   overflow: hidden;
   background: #0f1a20;
   color: var(--c-text-light);
   will-change: transform;
-  transform: translateZ(0);          /* enable GPU compositing */
+  transform: translateZ(0);
   transition: transform 0.28s ease, box-shadow 0.28s ease, outline 0.2s ease;
   outline: 0 solid transparent;
   z-index: 0;
 }
 
-/* Subtle gradients per project */
-.project-card[data-project="swpt"]  { background: linear-gradient(135deg, #0f1a20 0%, #123042 100%); }
-.project-card[data-project="lca"]   { background: linear-gradient(135deg, #0f1a20 0%, #1a3e4f 100%); }
-.project-card[data-project="wind"]  { background: linear-gradient(135deg, #0f1a20 0%, #224a5c 100%); }
-.project-card[data-project="CO2"]  { background: linear-gradient(135deg, #0f1a20 0%, #224a5c 100%); }
-.project-card[data-project="github"]  { background: linear-gradient(135deg, #0f1a20 0%, #2b5667 100%); }
+.project-card[data-project="swpt"] {
+  background: linear-gradient(135deg, #0f1a20 0%, #123042 100%);
+}
 
-/* BIG hover growth without horizontal scroll (container hides overflow) */
+.project-card[data-project="lca"] {
+  background: linear-gradient(135deg, #0f1a20 0%, #1a3e4f 100%);
+}
+
+.project-card[data-project="wind"] {
+  background: linear-gradient(135deg, #0f1a20 0%, #224a5c 100%);
+}
+
+.project-card.project-github {
+  background: linear-gradient(135deg, #0f1a20 0%, #2b5667 100%);
+}
+
 .project-card:hover,
 .project-card:focus-within,
 .project-card.active {
-  transform: scale(1.1);           /* “grow a ton” */
-  box-shadow: 0 22px 60px rgba(0,0,0,0.42);
-  outline: 2px solid rgba(255,255,255,0.14);
-  z-index: 2;                       /* float above neighbors */
+  transform: scale(1.1);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.42);
+  outline: 2px solid rgba(255, 255, 255, 0.14);
+  z-index: 2;
 }
 
-/* Inner layout */
+@media (min-width: 861px) {
+  .project-card:nth-child(3n+1) { transform-origin: left center; }
+  .project-card:nth-child(3n)   { transform-origin: right center; }
+  .project-card:nth-child(3n+2) { transform-origin: center center; }
+}
+
 .project-inner {
   height: 100%;
   display: grid;
@@ -429,7 +444,6 @@ a:focus-visible,
   text-transform: uppercase;
 }
 
-/* Reveal content */
 .project-reveal {
   max-width: 680px;
   opacity: 0;
@@ -457,23 +471,17 @@ a:focus-visible,
   margin-top: 12px;
 }
 
-/* --- Responsive --- */
-
-/* Large tablets: 2 columns, keep presence */
 @media (max-width: 1100px) and (min-width: 601px) {
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
   .project-card  { height: clamp(260px, 36vh, 460px); }
 }
 
-/* Mobile: 1 column, still tall; scale reduced for comfort */
 @media (max-width: 600px) {
   .projects-grid { grid-template-columns: 1fr; }
   .project-card  { height: clamp(260px, 44vh, 520px); }
   .project-card:hover,
   .project-card:focus-within,
-  .project-card.active {
-    transform: scale(1.08);  /* softer growth on small screens */
-  }
+  .project-card.active { transform: scale(1.08); }
 }
 
 /* ===== Footer (clean & minimal) ===== */
@@ -493,7 +501,6 @@ a:focus-visible,
   margin: 0 auto;
 }
 
-/* Brand row */
 .footer-brand {
   display: inline-flex;
   align-items: center;
@@ -502,11 +509,13 @@ a:focus-visible,
   color: var(--footer-fg);
   margin-bottom: 18px;
 }
+
 .footer-brand img {
   height: 54px;
   width: auto;
-  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
 }
+
 .footer-brand span {
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
@@ -514,7 +523,6 @@ a:focus-visible,
   text-transform: uppercase;
 }
 
-/* Divider */
 .footer-sep {
   border: 0;
   height: 1px;
@@ -522,7 +530,6 @@ a:focus-visible,
   margin: 18px 0 24px;
 }
 
-/* Info grid */
 .footer-grid {
   display: grid;
   grid-template-columns: 1.2fr auto auto;
@@ -535,20 +542,22 @@ a:focus-visible,
   opacity: 0.9;
 }
 
-/* Middle: compact nav */
 .footer-links {
   display: inline-flex;
   gap: 18px;
 }
+
 .footer-links a {
   color: var(--footer-dim);
   text-decoration: none;
   position: relative;
   padding-bottom: 2px;
 }
+
 .footer-links a:hover {
   color: var(--footer-fg);
 }
+
 .footer-links a::after {
   content: "";
   position: absolute;
@@ -559,38 +568,39 @@ a:focus-visible,
   background: var(--footer-fg);
   transition: width .25s ease;
 }
+
 .footer-links a:hover::after {
   width: 100%;
 }
 
-/* Right: contact cluster */
 .footer-contact {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   gap: 10px 14px;
   align-items: center;
-  justify-content: flex;
+  justify-content: flex-end;
 }
+
 .footer-link {
   color: var(--footer-dim);
   text-decoration: none;
 }
+
 .footer-link:hover {
   color: var(--footer-fg);
   text-decoration: underline;
 }
+
 .footer-dot {
   color: var(--footer-line);
 }
 
-/* CTA button sits under grid on narrow widths automatically */
 .footer-cta {
   grid-column: 1 / -1;
   justify-self: center;
   margin-top: 4px;
 }
 
-/* Bottom line */
 .footer-bottom {
   display: flex;
   align-items: center;
@@ -600,9 +610,11 @@ a:focus-visible,
   padding-top: 16px;
   color: var(--footer-dim);
 }
+
 .footer-bottom small {
   opacity: 0.85;
 }
+
 .to-top {
   color: var(--footer-fg);
   text-decoration: none;
@@ -612,11 +624,11 @@ a:focus-visible,
   border: 1px solid var(--footer-line);
   border-radius: 6px;
 }
+
 .to-top:hover {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-/* Responsive tweaks */
 @media (max-width: 880px) {
   .footer-grid {
     grid-template-columns: 1fr;
@@ -636,4 +648,3 @@ a:focus-visible,
     gap: 10px;
   }
 }
-

@@ -11,7 +11,7 @@
 </head>
 <body id="top">
 
-  <!-- HERO (big logo centered) -->
+  <!-- HERO (long scroll, image background, centered logo, fade-out on scroll) -->
   <section id="hero" class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
 
@@ -31,14 +31,14 @@
     <!-- Desktop nav -->
     <nav class="site-nav" aria-label="Primary">
       <ul>
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#solutions">SOLUTIONS</a></li>
-        <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#projects">Projects</a></li>
       </ul>
     </nav>
 
     <!-- Desktop CTA -->
-    <a href="https://calendly.com/asheerin97/30min" target="_blank" class="btn-primary site-cta">Schedule a Meeting</a>
+    <a href="https://calendly.com/asheerin/meeting" target="_blank" class="btn-primary site-cta">Schedule a Meeting</a>
   </header>
 
   <!-- About -->
@@ -139,20 +139,7 @@
         </div>
       </article>
 
-      <article class="project-card" data-project="CO2" tabindex="0">
-        <div class="project-inner">
-          <h3 class="project-title">CO2 Emissions</h3>
-          <div class="project-reveal">
-            <p>
-              High-resolution CO2 emissions estimator—spatially and temporally explicit based on
-              building energy usage, traffic volume, and tree sequestration rates.
-            </p>
-            <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="project-card" data-project="github" tabindex="0">
+      <article class="project-card project-github" data-project="github" tabindex="0">
         <div class="project-inner">
           <h3 class="project-title">GitHub Repositories</h3>
           <div class="project-reveal">
@@ -166,52 +153,45 @@
     </div>
   </section>
 
-<footer id="contact" class="site-footer">
-  <div class="footer-inner">
+  <!-- Footer -->
+  <footer id="contact" class="site-footer">
+    <div class="footer-inner">
+      <a href="#top" class="footer-brand" aria-label="Back to top">
+        <img src="../static/images/logo_V3.png" alt="Fathom Solutions Logo" />
+        <span>Fathom Solutions</span>
+      </a>
 
-    <!-- Brand row -->
-    <a href="#top" class="footer-brand" aria-label="Back to top">
-      <img src="../static/images/logo_V3.png" alt="Fathom Solutions Logo" />
-      <span>Fathom Solutions</span>
-    </a>
+      <hr class="footer-sep" aria-hidden="true" />
 
-    <!-- Divider -->
-    <hr class="footer-sep" aria-hidden="true" />
+      <div class="footer-grid">
+        <p class="footer-tagline">Technical solutions for environmental resilience.</p>
 
-    <!-- Info grid -->
-    <div class="footer-grid">
-      <p class="footer-tagline">Technical solutions for environmental resilience.</p>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="#about">About</a>
+          <a href="#solutions">Solutions</a>
+          <a href="#projects">Projects</a>
+        </nav>
 
-      <div class="footer-contact">
-        <a href="tel:+14016266827" class="footer-link">401-626-6827</a>
-        <a href="mailto:asheerin97@gmail.com" class="footer-link">asheerin97@gmail.com</a>
-        <span class="footer-dot" aria-hidden="true">·</span>
-        <a href="https://linkedin.com/in/asheerin" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
-        <a href="https://github.com/andrewsheerin" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+        <div class="footer-contact">
+          <a href="tel:+14016266827" class="footer-link">401-626-6827</a>
+          <a href="mailto:asheerin97@gmail.com" class="footer-link">asheerin97@gmail.com</a>
+          <span class="footer-dot" aria-hidden="true">·</span>
+          <a href="https://linkedin.com/in/asheerin" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+          <a href="https://github.com/andrewsheerin" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+        </div>
+
+        <a href="https://calendly.com/asheerin/30min" target="_blank" class="btn-primary footer-cta">Schedule a Meeting</a>
       </div>
 
-      <a href="https://calendly.com/asheerin/30min" target="_blank" class="btn-primary footer-cta">
-        Schedule a Meeting
-      </a>
+      <div class="footer-bottom">
+        <small>© <span id="year"></span> Fathom Solutions. All rights reserved.</small>
+        <a href="#top" class="to-top" aria-label="Back to top">▴</a>
+      </div>
     </div>
-
-    <!-- Bottom line -->
-    <div class="footer-bottom">
-      <small>© <span id="year"></span> Fathom Solutions. All rights reserved.</small>
-      <a href="#top" class="to-top" aria-label="Back to top">▴</a>
-    </div>
-
-  </div>
-</footer>
-
-<script>
-  // update year once (keeps markup clean)
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
+  </footer>
 
   <script src="../static/script.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script>lucide.createIcons();</script>
+  <script>if (window.lucide) lucide.createIcons(); document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
