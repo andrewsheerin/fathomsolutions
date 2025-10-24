@@ -19,7 +19,7 @@
     const endY = Math.max(0, rawEndY - headerH - nudge);
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const duration = prefersReduced ? 0 : 1800; // adjust for slower/faster
+    const duration = prefersReduced ? 0 : 1600; // adjust for slower/faster
 
     if (duration === 0) {
       window.scrollTo({ top: endY, behavior: "auto" });

@@ -65,7 +65,7 @@ a:focus-visible,
 /* ===== Hero (long scroll, pinned logo) ===== */
 .hero {
   position: relative;
-  height: 160vh; /* deeper descent */
+  height: 150vh; /* deeper descent */
   overflow: visible;
   display: flex;
   align-items: center;
