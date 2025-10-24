@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fathom Solutions</title>
+  <meta name="description" content="Fathom Solutions provides technical solutions to environmental challenges through data analytics, GIS, and web app development." />
+  <link rel="stylesheet" href="static/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body id="top">
+
+  <!-- HERO (long scroll, image background, centered logo, fade-out on scroll) -->
+  <section id="hero" class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="hero-center">
+      <img src="static/images/inset_O_logo_white.png" alt="Fathom Solutions Logo" />
+    </div>
+
+    <a href="#about" class="scroll-hint">Learn more</a>
+  </section>
+
+  <!-- HEADER (hidden on hero, shows after hero) -->
+  <header class="site-header" role="banner" aria-label="Site header">
+    <a href="#top" class="compact-brand" aria-label="Fathom Solutions">
+      <img src="static/images/outside_logo_white.png" alt="Fathom Solutions Logo" />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#solutions">SOLUTIONS</a></li>
+        <li><a href="#projects">PROJECTS</a></li>
+      </ul>
+    </nav>
+
+    <!-- Desktop CTA -->
+    <a href="https://calendly.com/asheerin/meeting" target="_blank" class="btn-primary site-cta">Schedule a Meeting</a>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="section dark">
+    <div class="container">
+      <h1>Deep Understandings</h1>
+      <p>
+        At Fathom Solutions, our mission is to provide technical solutions to environmental problems.
+        With the world continuing to face resilience, infrastructure, and pollution concerns,
+        the innovation of technology must keep up to ensure sustainability.
+        Our data-driven strategies allow our clients to be confident in their decision-making.
+      </p>
+
+      <div class="profile">
+        <img src="static/images/headshot.jpg" alt="Headshot of Andrew Sheerin" />
+        <div>
+          <h2>Andrew Sheerin, PhD</h2>
+          <p>Engineering, Software Development, GIS Analyst, Entrepreneur</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions -->
+  <section id="solutions" class="section light">
+    <div class="container solutions-wrap">
+      <header class="section-lead">
+        <h1>Solutions We Deliver</h1>
+        <p class="lead-sub">Practical expertise to move projects from data to decision.</p>
+      </header>
+
+      <div class="solutions-grid">
+        <article class="solution-card">
+          <i data-lucide="bar-chart-3" class="solution-icon"></i>
+          <h3>Data Analytics</h3>
+          <p>Turn complex datasets into clear, actionable insights for planning and policy.</p>
+        </article>
+
+        <article class="solution-card">
+          <i data-lucide="map" class="solution-icon"></i>
+          <h3>GIS Specialist</h3>
+          <p>Spatial analysis, mapping, and geoprocessing to understand place-based impacts.</p>
+        </article>
+
+        <article class="solution-card">
+          <i data-lucide="layout-dashboard" class="solution-icon"></i>
+          <h3>Web-App Development</h3>
+          <p>Lightweight, purpose-built tools that put your data to work for stakeholders.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section dark projects-section">
+    <header class="section-lead projects-lead">
+      <h1>Projects</h1>
+      <p class="lead-sub">Selected tools and repositories we’re building.</p>
+    </header>
+
+    <div class="projects-grid" aria-label="Project list">
+      <article class="project-card" data-project="swpt" tabindex="0">
+        <div class="project-inner">
+          <h3 class="project-title">SWPT</h3>
+          <div class="project-reveal">
+            <p>
+              A streamlined workflow and performance toolkit for sustainability work—templates,
+              data flows, and evaluation steps you can trust.
+            </p>
+            <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card" data-project="lca" tabindex="0">
+        <div class="project-inner">
+          <h3 class="project-title">LCA Pave</h3>
+          <div class="project-reveal">
+            <p>
+              Life-cycle assessment tooling for pavements—compare materials, costs, and impacts
+              across scenarios with transparent assumptions.
+            </p>
+            <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card" data-project="wind" tabindex="0">
+        <div class="project-inner">
+          <h3 class="project-title">Wind App</h3>
+          <div class="project-reveal">
+            <p>
+              Lightweight wind resource viewer—map layers, quick stats, and exportable summaries
+              to accelerate site screening.
+            </p>
+            <a class="btn-secondary" href="#" target="_blank" rel="noopener">White Paper</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card project-github" data-project="github" tabindex="0">
+        <div class="project-inner">
+          <h3 class="project-title">GitHub Repositories</h3>
+          <div class="project-reveal">
+            <p>
+              Explore our public code—experiments, utilities, and app starters that power our projects.
+            </p>
+            <a class="btn-primary" href="https://github.com/andrewsheerin" target="_blank" rel="noopener">View GitHub</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="site-footer">
+    <div class="footer-inner">
+      <a href="#top" class="footer-brand" aria-label="Back to top">
+        <img src="static/images/logo_V3.png" alt="Fathom Solutions Logo" />
+        <span>Fathom Solutions</span>
+      </a>
+
+      <hr class="footer-sep" aria-hidden="true" />
+
+      <div class="footer-grid">
+        <p class="footer-tagline">Technical solutions for environmental resilience.</p>
+
+        <nav class="footer-links" aria-label="Footer">
+          <a href="#about">About</a>
+          <a href="#solutions">Solutions</a>
+          <a href="#projects">Projects</a>
+        </nav>
+
+        <div class="footer-contact">
+          <a href="tel:+14016266827" class="footer-link">401-626-6827</a>
+          <a href="mailto:asheerin97@gmail.com" class="footer-link">asheerin97@gmail.com</a>
+          <span class="footer-dot" aria-hidden="true">·</span>
+          <a href="https://linkedin.com/in/asheerin" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+          <a href="https://github.com/andrewsheerin" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+        </div>
+
+        <a href="https://calendly.com/asheerin/30min" target="_blank" class="btn-primary footer-cta">Schedule a Meeting</a>
+      </div>
+
+      <div class="footer-bottom">
+        <small>© <span id="year"></span> Fathom Solutions. All rights reserved.</small>
+        <a href="#top" class="to-top" aria-label="Back to top">▴</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="static/script.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if (window.lucide) lucide.createIcons(); document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
