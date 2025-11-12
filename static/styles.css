@@ -288,24 +288,176 @@ a:focus-visible,
   transform: translateY(-1px);
 }
 
-/* ===== Profile ===== */
-.profile {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 24px;
-  align-items: center;
-  max-width: 720px;
-  margin: 28px auto 0;
-  text-align: left;
+/* ===== ABOUT ===== */
+#about {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--c-dark-bg);
+  color: var(--c-text-light);
+  font-size: clamp(0.95rem, 1vw + 0.6rem, 1.1rem);
+  line-height: 1.6;
 }
 
-.profile img {
-  width: 140px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.25);
+/* Headings scale down slightly too */
+#about h1,
+#about h2 {
+  font-size: clamp(1.4rem, 1vw + 1rem, 1.9rem);
 }
+
+
+/* content sits above the decorative layers */
+#about .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Topographic map — full section, subtle */
+#about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("images/topographic_map.jpg") top right / cover no-repeat;
+  opacity: 0.10;                 /* lighter so text stays readable */
+  mix-blend-mode: soft-light;    /* topo lines blend into bg */
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Headshot — fixed size block at bottom-left (NOT full-screen) */
+#about::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30vw;                    /* ~30% of viewport width on desktop */
+  max-width: 520px;               /* cap so it doesn't get huge on 4k */
+  aspect-ratio: 4 / 3;            /* keeps a tall portrait shape */
+  background: url("images/stage_headshot.jpg") bottom left / cover no-repeat;
+  opacity: 0.28;
+  /* soft fade up/right so it blends into the section */
+  mask-image: linear-gradient(to top right, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 90%);
+  -webkit-mask-image: linear-gradient(to top right, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 90%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Fine-tuned readability for smaller devices */
+@media (max-width: 768px) {
+  #about {
+    line-height: 1.5;
+  }
+  .about-bio {
+    max-width: 90%;
+    margin: 32px auto;
+  }
+}
+
+/* Push content rightward to avoid overlapping the headshot on wide screens */
+@media (min-width: 1024px) {
+  #about .container {
+    padding-left: min(32vw, 520px);  /* matches image width cap */
+  }
+}
+
+/* Medium screens: slightly smaller image and gentler padding */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #about::after {
+    width: 26vw;
+    max-width: 420px;
+    opacity: 0.24;
+  }
+  #about .container {
+    padding-left: min(28vw, 420px);
+  }
+}
+
+/* Mobile: shrink or reposition image and reset padding so text uses full width */
+@media (max-width: 767px) {
+  #about::after {
+    width: 52vw;              /* smaller, less intrusive */
+    max-width: none;
+    aspect-ratio: 1 / 1;      /* squarer for phone proportions */
+    opacity: 0.20;
+    background-position: 20% bottom;
+  }
+  #about .container {
+    padding-left: 16px;       /* standard mobile padding */
+    padding-right: 16px;
+  }
+}
+
+
+/* --- Definitions Box Styling --- */
+
+.definitions {
+  margin-top: 36px;
+  padding: 24px 28px;
+  border: 2px solid rgba(175, 198, 212, 0.4); /* soft brand tone */
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.08); /* subtle transparent bg */
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 1;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-size: clamp(0.9rem, 0.9vw + 0.6rem, 1rem);
+  padding: clamp(16px, 2vw, 28px);
+}
+
+/* Center the heading and the final phrase */
+.definitions h2,
+.definition-phrase {
+  text-align: center;
+}
+
+/* “fath·om” term styling */
+.definitions h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  color: var(--c-cta);
+  margin-bottom: 12px;
+}
+
+/* Inner definition text block (left-aligned) */
+.definition-text {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+/* Definition paragraphs */
+.definition-text p {
+  margin: 6px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* “Together it means…” phrase */
+.definition-phrase {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-top: 16px;
+}
+
+/* Highlighted “Deeper Understandings” */
+.definition-highlight {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--c-cta);
+  margin-left: 6px;
+}
+
+.about-bio {
+  max-width: 720px;
+  margin: 48px auto 0;
+  text-align: left;
+}
+.about-bio h2 {
+  margin: 0 0 10px;
+}
+
+
+
 
 /* ===== Solutions ===== */
 .solutions-wrap {
