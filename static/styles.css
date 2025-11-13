@@ -625,6 +625,14 @@ a:focus-visible,
 }
 
 
+/* hide btn-primary footer-cta when the floating cta is visible */
+@media (max-width: 720px) {
+    .footer-cta {
+    display: none;
+    }
+}
+
+
 /* ===== FOOTER ===== */
 .site-footer {
   background: #0f1a20;
@@ -676,12 +684,18 @@ a:focus-visible,
 
 .footer-contact {
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  gap: clamp(18px, 3vw, 40px);
+  margin-bottom: 18px;
 }
 
+/* Click area around each icon */
 .footer-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
   color: #fff;
   text-decoration: none;
   opacity: 0.9;
@@ -691,14 +705,46 @@ a:focus-visible,
   opacity: 1;
 }
 
-.footer-dot {
-  opacity: 0.5;
+/* Icon sizing scales with screen size */
+.footer-icon {
+  width: clamp(20px, 2.4vw, 26px);
+  height: auto;
+  fill: currentColor;
 }
 
-/* CTA button */
+/* Footer CTA default (desktop) */
 .footer-cta {
   margin-top: 10px;
 }
+
+/* Hide footer CTA when floating CTA is visible (mobile) */
+@media (max-width: 720px) {
+  body.header-visible .footer-cta {
+    display: none;
+  }
+}
+
+/* Copy-to-clipboard toast */
+.copy-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.85);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 9999;
+}
+
+.copy-toast.visible {
+  opacity: 1;
+}
+
 
 /* Bottom row */
 .footer-bottom {

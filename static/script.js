@@ -100,3 +100,42 @@
   window.addEventListener("scroll", fadeAndParallax, { passive: true });
   window.addEventListener("resize", fadeAndParallax);
 })();
+
+/* ===== Copy-to-Clipboard for Footer Icons ===== */
+
+document.querySelectorAll(".copy-action").forEach(el => {
+  el.addEventListener("click", async () => {
+    const text = el.dataset.copy;
+    const label = el.dataset.label || "Copied!";
+
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      // Fallback for older browsers
+      const tmp = document.createElement("textarea");
+      tmp.value = text;
+      document.body.appendChild(tmp);
+      tmp.select();
+      document.execCommand("copy");
+      tmp.remove();
+    }
+
+    // Show toast
+    showCopyToast(label);
+  });
+});
+
+function showCopyToast(message) {
+  const toast = document.createElement("div");
+  toast.className = "copy-toast";
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  setTimeout(() => toast.classList.add("visible"), 10);
+
+  setTimeout(() => {
+    toast.classList.remove("visible");
+    setTimeout(() => toast.remove(), 300);
+  }, 1500);
+}
+
