@@ -337,10 +337,16 @@ a:focus-visible,
 }
 
 /* Paragraphs scale nicely */
+/* LARGEST paragraph (About description) */
+.about-description {
+       /* limit width */
+  margin: 0 auto;         /* center within about-container */
+}
+
 .about-description p {
   font-size: clamp(1.05rem, 1.2vw + 0.8rem, 1.35rem);
   line-height: 1.65;
-  max-width: 70ch;
+  margin: 0;
 }
 
 .about-bio p {
