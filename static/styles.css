@@ -376,12 +376,14 @@ a:focus-visible,
 /* Definitions that stay on one line and scale down */
 .definition-text p {
   margin: 2px 0;
-  white-space: nowrap; /* prevents line breaks */
   overflow: hidden;    /* hides overflow if too tight */
-  text-overflow: ellipsis; /* optional – adds ... if text clips */
-  font-size: clamp(0.8rem, 1vw + 0.4rem, 1rem); /* fluidly scales */
+  font-size: clamp(0.6rem, 1vw + 0.4rem, 1rem); /* fluidly scales */
   line-height: 1.4;
 }
+
+
+/* what doe each the the clamp elements mean? */
+/* clamp(minimum size, preferred size based on viewport width, maximum size) */
 
 .definition-phrase {
   margin-top: 4px;
@@ -588,6 +590,41 @@ a:focus-visible,
   .project-card.active { transform: scale(1.08); }
 }
 
+/* ===== Floating CTA (mobile) ===== */
+
+/* Base: hidden by default */
+.floating-cta {
+  display: none;
+}
+
+/* Style the CTA bar + button */
+@media (max-width: 720px) {
+  /* Only when we've scrolled past the hero (header-visible) */
+  body.header-visible .floating-cta {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 16px;
+    background: rgba(11, 24, 32, 0.92); /* deep, subtle overlay */
+    backdrop-filter: blur(6px);
+    z-index: 900; /* above content, below any modals/menus */
+    text-align: center;
+  }
+
+  .floating-cta-btn {
+    display: inline-block;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    border-radius: 999px; /* pill-shaped */
+  }
+}
+
+
 /* ===== Footer (clean & minimal) ===== */
 .site-footer {
   --footer-bg: linear-gradient(180deg, #0f1a20 0%, #0c1720 100%);
@@ -606,26 +643,26 @@ a:focus-visible,
 }
 
 .footer-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: var(--footer-fg);
-  margin-bottom: 18px;
+  display: flex;        /* block-level flex container */
+  justify-content: center;
+  text-align: center;
+  width: 100%;          /* ensures proper centering */
 }
 
+
+
 .footer-brand img {
-  height: 54px;
-  width: auto;
+  align-items: center;
+  width: clamp(120px, 15vw, 260px);
+  height: auto;
   filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
 }
 
-.footer-brand span {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
+.footer
+
+
+
+
 
 .footer-sep {
   border: 0;
