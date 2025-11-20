@@ -80,7 +80,7 @@ a:focus-visible,
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: url("images/underwater_background.png") center top / cover no-repeat;
+  background: url("images/underwater_background.svg") center top / cover no-repeat;
   filter: brightness(0.5) saturate(1.1);
   transform: scale(1.05);
   transition: background-position 0.1s linear;
@@ -306,7 +306,7 @@ a:focus-visible,
   content: "";
   position: absolute;
   inset: 0;
-  background: url("images/topographic_map.jpg") center / cover no-repeat;
+  background: url("images/topographic_map.svg") center / cover no-repeat;
   opacity: 0.1;
   pointer-events: none;
   z-index: 1;
