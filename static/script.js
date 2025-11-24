@@ -139,3 +139,44 @@ function showCopyToast(message) {
   }, 1500);
 }
 
+/* ============================
+   SWPT: Header Reveal + Scroll Hint Fade + Smooth Scroll
+   ============================ */
+
+(function () {
+  const hero = document.getElementById("swpt-hero");
+  const hint = document.querySelector(".swpt-scroll-hint");
+  const root = document.body;
+
+  if (!hero) return;
+
+  /* Header is visible once we are NOT on hero */
+  const io = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        root.classList.remove("swpt-header-visible"); // hide ON hero
+      } else {
+        root.classList.add("swpt-header-visible"); // show after hero
+      }
+    },
+    { threshold: 0.6 }
+  );
+  io.observe(hero);
+
+  /* Fade hint on scroll */
+  window.addEventListener("scroll", () => {
+    const fade = 1 - window.scrollY / (hero.offsetHeight * 0.4);
+    hint.style.opacity = Math.max(0, fade);
+  });
+
+  /* Smooth scroll */
+  const about = document.getElementById("swpt-about");
+  if (hint && about) {
+    hint.addEventListener("click", (e) => {
+      e.preventDefault();
+      about.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+})();
+
+

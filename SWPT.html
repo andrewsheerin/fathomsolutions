@@ -3,30 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SWPT Project</title>
-  <meta name="description" content="SWPT - A project by Fathom Solutions" />
-  <link rel="stylesheet" href="static/styles.css" />
+  <title>SWPT Landing Page</title>
+
+  <!-- Fonts from main site -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- SWPT-specific styles -->
+  <link rel="stylesheet" href="static/swpt_styles.css" />
+
+  <!-- Shared JS -->
+  <script defer src="static/script.js"></script>
 </head>
+
 <body>
-  <header class="site-header">
-    <a href="index.html" aria-label="Back to Home">
-      <img src="static/images/outside_logo_white.png" alt="Fathom Solutions Logo" />
+
+  <!-- HERO -->
+  <section id="swpt-hero" class="swpt-hero">
+    <div class="swpt-hero-bg"></div>
+
+    <div class="swpt-hero-logo">
+      <img src="static/images/swpt-logo-cropped.png" alt="SWPT Logo" />
+    </div>
+
+    <a href="#swpt-about" class="swpt-scroll-hint">Learn More</a>
+  </section>
+
+  <!-- HEADER -->
+  <header class="swpt-header">
+    <a href="/" class="swpt-header-logo">
+      <img src="static/images/swpt-logo-cropped.png" alt="SWPT Logo" />
     </a>
-    <nav>
-      <ul>
-        <li><a href="index.html#about">ABOUT</a></li>
-        <li><a href="index.html#solutions">SOLUTIONS</a></li>
-        <li><a href="index.html#projects">PROJECTS</a></li>
-      </ul>
+
+    <nav class="swpt-header-nav">
+      <a href="#swpt-about">About</a>
+      <a href="#swpt-features">Features</a>
     </nav>
+
+    <a href="#swpt-contact" class="swpt-header-cta">Contact</a>
   </header>
 
-  <main class="section">
-    <div class="container">
-      <h1>SWPT</h1>
-      <p>Welcome to the SWPT project details! More information will be added about the project here.</p>
-      <a href="index.html#projects" class="btn-secondary">Back to Projects</a>
+  <!-- ABOUT SECTION -->
+  <section id="swpt-about" class="swpt-about">
+    <h1>About SWPT</h1>
+    <p class="swpt-about-intro">
+      SWPT (Stormwater Pollution Tracker) helps municipalities understand, model, and reduce
+      urban runoff pollution with optimized street sweeping strategies.
+    </p>
+
+    <div class="swpt-about-cards">
+
+      <div class="swpt-card">
+        <div class="swpt-card-image" style="background-image: url('static/images/stormwater_pollution.jpeg');"></div>
+        <div class="swpt-card-content">
+          <h2>Stormwater Pollution</h2>
+          <p>Pollutants such as sediment, metals, nutrients, and plastics wash into waterways during rain events.</p>
+        </div>
+      </div>
+
+      <div class="swpt-card">
+        <div class="swpt-card-image" style="background-image: url('static/images/urban_pollution.jpg');"></div>
+        <div class="swpt-card-content">
+          <h2>Urban Runoff</h2>
+          <p>Impervious surfaces increase flow volumes, carrying pollutants quickly into receiving waters.</p>
+        </div>
+      </div>
+
+      <div class="swpt-card">
+        <div class="swpt-card-image" style="background-image: url('static/images/street_sweeper.jpeg');"></div>
+        <div class="swpt-card-content">
+          <h2>Street Sweeping</h2>
+          <p>One of the most cost-effective tools for removing pollutants before they reach storm drains.</p>
+        </div>
+      </div>
+
     </div>
-  </main>
+  </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="swpt-features" class="swpt-features">
+      <h1>Core Features</h1>
+      <p class="swpt-features-intro">
+        SWPT gives cities the tools to simulate pollutant loads, prioritize critical areas,
+        and optimize strategies for maximum reduction.
+      </p>
+
+      <div class="swpt-features-cards">
+        <div class="swpt-feature-card">
+          <h2>Simulate</h2>
+          <p>Model pollutant removal outcomes using different street sweeping schedules and strategies.</p>
+        </div>
+
+        <div class="swpt-feature-card">
+          <h2>Prioritize</h2>
+          <p>Identify critical road segments for pollutant capture using spatial and hydrologic insights.</p>
+        </div>
+
+        <div class="swpt-feature-card">
+          <h2>Optimize</h2>
+          <p>Generate sweeping plans that maximize pollution reduction while minimizing costs.</p>
+        </div>
+      </div>
+    </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="swpt-contact" class="swpt-contact">
+    <h1>Get in Touch</h1>
+    <p>
+      Have questions or want to schedule a demo? Reach out and let's talk about how SWPT
+      can support your municipality's stormwater goals.
+    </p>
+  </section>
+
 </body>
 </html>

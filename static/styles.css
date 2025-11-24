@@ -783,3 +783,153 @@ a:focus-visible,
 .to-top:hover {
   opacity: 1;
 }
+
+
+/* ===== SWPT Landing Page Styles ===== */
+
+/* === General Styles === */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  color: #fff;
+  background-color: #214156;
+  line-height: 1.6;
+}
+
+h1, h2 {
+  margin: 0;
+  color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* === Header === */
+.main-header {
+  background: #0068E7;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo img {
+  width: 50px;
+  height: auto;
+}
+
+.nav {
+  margin-left: auto;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  font-size: 1.1rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cta-button {
+  background: #214156;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background: #003e99;
+}
+
+/* === Popup Form === */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.hidden {
+  display: none;
+}
+
+.popup-content {
+  background: #ffffff;
+  color: #000000;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+form input, form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-submit, .schedule-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 15px;
+  background: #0068E7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.schedule-button {
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.form-submit:hover, .schedule-button:hover {
+  background: #004bb7;
+}
