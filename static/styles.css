@@ -428,6 +428,7 @@ a:focus-visible,
 
 .section-lead h1 {
   margin-bottom: 8px;
+  color: var(--c-text-dark);
 }
 
 .lead-sub {
@@ -446,9 +447,13 @@ a:focus-visible,
   color: var(--c-text-dark);
   border-radius: var(--radius);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  padding: 36px 28px;
+  padding: 20px 20px;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .solution-card:hover {
@@ -457,11 +462,21 @@ a:focus-visible,
 }
 
 .solution-icon {
-  width: 52px;
-  height: 52px;
-  color: var(--c-cta);
-  margin-bottom: 18px;
+  width: 70px;
+  height: 70px;
+  background: var(--c-cta);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.solution-icon svg {
+  width: 60%;
+  height: 60%;
+}
+
+
 
 @media (max-width: 860px) {
   .solutions-grid {
@@ -479,6 +494,11 @@ a:focus-visible,
 .projects-lead {
   text-align: center;
   margin-bottom: 16px;
+}
+
+.projects-lead h1 {
+  margin-bottom: 8px;
+  color: var(--c-text-light);
 }
 
 .projects-grid {
