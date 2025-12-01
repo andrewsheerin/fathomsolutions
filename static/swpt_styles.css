@@ -111,7 +111,7 @@ body.swpt-header-visible .swpt-header {
 }
 
 .swpt-header-logo img {
-  height: 55px;
+  height: 65px;
 }
 
 
@@ -121,14 +121,12 @@ body.swpt-header-visible .swpt-header {
   margin-left: 3%; /* brings tabs nearer to the logo */
 }
 
-/* bring the nav links to the left of the header */
-
-
 .swpt-header-nav a {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   color: #fff;
   position: relative;
+  text-decoration: none;
 }
 
 .swpt-header-nav a::after {
@@ -153,6 +151,16 @@ body.swpt-header-visible .swpt-header {
   font-family: 'Montserrat';
   font-weight: 700;
   margin-left: 50%; /* pin CTA to the far right */
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.swpt-header-cta:hover {
+  background: #8EAFC8;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+  transform: scale(1.05);
+
 }
 
 
