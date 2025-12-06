@@ -42,8 +42,8 @@
   --swpt-font-h1: clamp(2.4rem, 2.5vw + 1.8rem, 3.4rem);
   --swpt-font-h2: clamp(1.8rem, 1.8vw + 1.4rem, 2.6rem);
   --swpt-font-h3: clamp(1.3rem, 1.3vw + 1.1rem, 1.7rem);
-  --swpt-font-hero-title: clamp(1.9rem, 2.2vw + 1.2rem, 3.2rem);
-  --swpt-font-hero-sub: clamp(1.1rem, 1.2vw + 1rem, 1.6rem);
+  --swpt-font-hero-title: clamp(1.3rem, 1.4vw + 0.9rem, 3.2rem);
+  --swpt-font-hero-sub: clamp(0.9rem, 1.0vw + 0.8rem, 1.6rem);
   --swpt-font-section-title: clamp(1.9rem, 1.6vw + 1.5rem, 2.4rem);
   --swpt-font-impact: clamp(1.3rem, 1.4vw + 1.1rem, 1.9rem);
 
@@ -190,7 +190,7 @@ a {
 
   /* Center things overall and leave room on the right for the back button */
   .home-header {
-    justify-content: center;
+    justify-content: flex-start;
     padding-left: 16px;
     padding-right: 64px;   /* space where the back button sits */
   }
