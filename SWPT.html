@@ -8,12 +8,12 @@
 
 </head>
 
-<body>
+<body id="top">
 
 <!-- HEADER (kept exactly as before) -->
 <header class="home-header">
     <h1>
-        <a href="/home" class="home-link">
+        <a href="#top" class="home-link" onclick="event.preventDefault(); window.scrollTo({top:0, behavior: 'smooth'});">
             <img src="../static/images/swpt-logo-cropped.png" alt="SWPT Logo" class="home-logo">
         </a>
         Storm Water Pollution Tracker
@@ -159,7 +159,7 @@
 </footer>
 
 <!-- Logout Button -->
-<a href="index.html" class="fixed-login-btn">Back to Fathom</a>
+<a href="index.html" class="fixed-back-btn">Back to Fathom</a>
 
 <!-- ============================== -->
 <!--        MODULE MODALS          -->
