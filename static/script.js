@@ -179,4 +179,56 @@ function showCopyToast(message) {
   }
 })();
 
+/* ============================
+   Hero buttons → info modal
+   ============================ */
+(function () {
+  const buttons = document.querySelectorAll('.hero-btn');
+  const modal = document.getElementById('info-modal');
+  if (!modal || !buttons || buttons.length === 0) return;
 
+  const titleEl = document.getElementById('info-modal-title');
+  const bodyEl = document.getElementById('info-modal-body');
+  const closeBtn = modal.querySelector('.info-modal-close');
+
+  function openModal(title, body, opener) {
+    titleEl.textContent = title || '';
+    bodyEl.textContent = body || '';
+    modal.setAttribute('aria-hidden', 'false');
+    // prevent background scroll
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    // focus the close button for keyboard users
+    closeBtn.focus();
+    // remember opener to return focus
+    modal._opener = opener || null;
+    document.addEventListener('keydown', onKeyDown);
+  }
+
+  function closeModal() {
+    modal.setAttribute('aria-hidden', 'true');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    if (modal._opener && typeof modal._opener.focus === 'function') modal._opener.focus();
+    document.removeEventListener('keydown', onKeyDown);
+  }
+
+  function onKeyDown(e) {
+    if (e.key === 'Escape') closeModal();
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const title = btn.dataset.title || btn.textContent || 'Info';
+      const blurb = btn.dataset.blurb || '';
+      openModal(title, blurb, btn);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+})();

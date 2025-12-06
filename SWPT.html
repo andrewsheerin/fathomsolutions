@@ -1,119 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SWPT</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWPT Home</title>
+  <link rel="stylesheet" href="static/swpt_styles.css">
 
-  <!-- Fonts from main site -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- SWPT-specific styles -->
-  <link rel="stylesheet" href="static/swpt_styles.css" />
-
-  <!-- Shared JS -->
-  <script defer src="static/script.js"></script>
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <section id="swpt-hero" class="swpt-hero">
-    <div class="swpt-hero-bg"></div>
+<!-- HEADER (kept exactly as before) -->
+<header class="home-header">
+    <h1>
+        <a href="/home" class="home-link">
+            <img src="../static/images/swpt-logo-cropped.png" alt="SWPT Logo" class="home-logo">
+        </a>
+        Storm Water Pollution Tracker
+    </h1>
+</header>
 
-    <div class="swpt-hero-logo">
-      <img src="static/images/swpt-logo-cropped.png" alt="SWPT Logo" />
+
+
+<!-- ============================== -->
+<!--       HERO SECTION             -->
+<!-- ============================== -->
+<section class="hero-section">
+    <div class="hero-inner">
+        <h1 class="hero-title">Clean Streets = Clean Water</h1>
+        <p class="hero-subtitle">
+            Data-driven tools to improve sweeping efficiency, reduce stormwater pollution,
+            and optimize municipal operations.
+        </p>
+
+        <div class="hero-buttons">
+            <button class="primary hero-btn" onclick="openModal('simulateModal')">Simulate</button>
+            <button class="primary hero-btn" onclick="openModal('prioritizeModal')">Prioritize</button>
+            <button class="primary hero-btn" onclick="openModal('optimizeModal')">Optimize</button>
+        </div>
     </div>
+</section>
 
-    <a href="#swpt-about" class="swpt-scroll-hint">Learn More</a>
-  </section>
 
-  <!-- HEADER -->
-  <header class="swpt-header">
-    <a href="#swpt-about" class="swpt-header-logo">
-      <img src="static/images/swpt-logo-cropped.png" alt="SWPT Logo" />
-    </a>
 
-    <nav class="swpt-header-nav">
-      <a href="#swpt-about">ABOUT</a>
-      <a href="#swpt-features">FEATURES</a>
-    </nav>
+<!-- ============================== -->
+<!--     WHY IT MATTERS            -->
+<!-- ============================== -->
+<section class="why-section">
+    <h2 class="section-title">Why Street Sweeping Matters</h2>
 
-    <a href="#swpt-contact" class="swpt-header-cta">Contact Us</a>
-  </header>
+    <div class="why-row">
 
-  <!-- ABOUT SECTION -->
-  <section id="swpt-about" class="swpt-about">
-    <h1>About SWPT</h1>
-    <p class="swpt-about-intro">
-      SWPT (Stormwater Pollution Tracker) helps municipalities understand, model, and reduce
-      urban runoff pollution with optimized street sweeping strategies.
-    </p>
-
-    <div class="swpt-about-cards">
-
-      <div class="swpt-card">
-        <div class="swpt-card-image" style="background-image: url('static/images/stormwater_pollution.jpeg');"></div>
-        <div class="swpt-card-content">
-          <h2>Stormwater Pollution</h2>
-          <p>Pollutants such as sediment, metals, nutrients, and plastics wash into waterways during rain events.</p>
+        <div class="why-card">
+            <img src="../static/images/urban_pollution.jpg" class="why-img">
+            <p class="why-text">Urban streets accumulate excess pollutants such as sediment, metals, nutrients, and debris.</p>
         </div>
-      </div>
 
-      <div class="swpt-card">
-        <div class="swpt-card-image" style="background-image: url('static/images/urban_pollution.jpg');"></div>
-        <div class="swpt-card-content">
-          <h2>Urban Runoff</h2>
-          <p>Impervious surfaces increase flow volumes, carrying pollutants quickly into receiving waters.</p>
+        <div class="why-card">
+            <img src="../static/images/stormwater_pollution.jpeg" class="why-img">
+            <p class="why-text">Stormwater runoff transports these pollutants directly into local waterways.</p>
         </div>
-      </div>
 
-      <div class="swpt-card">
-        <div class="swpt-card-image" style="background-image: url('static/images/street_sweeper.jpeg');"></div>
-        <div class="swpt-card-content">
-          <h2>Street Sweeping</h2>
-          <p>One of the most cost-effective tools for removing pollutants before they reach storm drains.</p>
+        <div class="why-card">
+            <img src="../static/images/street_sweeper.jpeg" class="why-img">
+            <p class="why-text">Street sweeping is the most cost-effective pollution control measure, but only when strategically scheduled and targeted.</p>
         </div>
-      </div>
 
     </div>
-  </section>
+</section>
 
-    <!-- FEATURES SECTION -->
-    <section id="swpt-features" class="swpt-features">
-      <h1>Core Features</h1>
-      <p class="swpt-features-intro">
-        SWPT gives cities the tools to simulate pollutant loads, prioritize critical areas,
-        and optimize strategies for maximum reduction.
-      </p>
 
-      <div class="swpt-features-cards">
-        <div class="swpt-feature-card">
-          <h2>Simulate</h2>
-          <p>Model pollutant removal outcomes using different street sweeping schedules and strategies.</p>
+
+<!-- ============================== -->
+<!--     MODULE CARDS              -->
+<!-- ============================== -->
+<section class="modules-section">
+    <h2 class="section-title">What You Can Do with SWPT</h2>
+
+    <div class="modules-row">
+
+        <div class="module-card">
+            <div class="module-icon">
+                <img src="../static/images/simulate_icon.png" alt="Prioritize" class="module-icon-img">
+            </div>
+            <h3>Simulate</h3>
+            <p>Model buildup, washoff, and sweeper removal to calculate polluton reduction across your road network.</p>
+            <button class="module-button" onclick="openModal('simulateModal')">Learn More</button>
         </div>
 
-        <div class="swpt-feature-card">
-          <h2>Prioritize</h2>
-          <p>Identify critical road segments for pollutant capture using spatial and hydrologic insights.</p>
+        <div class="module-card">
+            <div class="module-icon">
+                <img src="../static/images/prioritize_icon.png" alt="Prioritize" class="module-icon-img">
+            </div>
+            <h3>Prioritize</h3>
+            <p>Rank road segments using environmental and social weighting factors to target areas of concern.</p>
+            <button class="module-button" onclick="openModal('prioritizeModal')">Learn More</button>
         </div>
 
-        <div class="swpt-feature-card">
-          <h2>Optimize</h2>
-          <p>Generate sweeping plans that maximize pollution reduction while minimizing costs.</p>
+        <div class="module-card">
+            <div class="module-icon">
+                <img src="../static/images/optimize_icon.png" alt="Prioritize" class="module-icon-img">
+            </div>
+            <h3>Optimize</h3>
+            <p>Find the most efficient sweeper routes and cost-effective sweeping schedule for your sweeping program.</p>
+            <button class="module-button" onclick="openModal('optimizeModal')">Learn More</button>
         </div>
-      </div>
-    </section>
 
-  <!-- CONTACT SECTION -->
-  <section id="swpt-contact" class="swpt-contact">
-    <h1>Get in Touch</h1>
+    </div>
+</section>
+
+
+
+<!-- ============================== -->
+<!--     HOW IT WORKS              -->
+<!-- ============================== -->
+<section class="how-section">
+    <h2 class="section-title">How SWPT Works</h2>
+
+    <div class="how-row">
+
+        <div class="how-step">
+            <div class="step-circle">1</div>
+            <h3>Upload Road Network</h3>
+            <p>Provide a GeoJSON or ZIP shapefile of your city’s streets.</p>
+        </div>
+
+        <div class="how-step">
+            <div class="step-circle">2</div>
+            <h3>Configure Parameters</h3>
+            <p>Set sweeper efficiency, modules, land-use factors, and costs.</p>
+        </div>
+
+        <div class="how-step">
+            <div class="step-circle">3</div>
+            <h3>Generate Insights</h3>
+            <p>Maps, plots, dashboards, priorities, and performance summaries.</p>
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- ============================== -->
+<!--     IMPACT STATEMENT           -->
+<!-- ============================== -->
+<section class="impact-section">
     <p>
-      Have questions or want to schedule a demo? Reach out and let's talk about how SWPT
-      can support your municipality's stormwater goals.
+        SWPT empowers municipalities to make smarter sweeping decisions, reduce stormwater pollution,
+        and justify BMP performance with defendable, data-driven reporting.
     </p>
-  </section>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="home-footer">
+    © 2025 SWPT
+</footer>
+
+<!-- Logout Button -->
+<a href="index.html" class="fixed-login-btn">Back to Fathom</a>
+
+<!-- ============================== -->
+<!--        MODULE MODALS          -->
+<!-- ============================== -->
+
+<!-- Overlay (shared for all modals) -->
+<div id="modalOverlay" class="modal-overlay" onclick="closeModal()"></div>
+
+<!-- SIMULATE MODAL -->
+<div id="simulateModal" class="modal-panel">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2>Simulate Module</h2>
+    <p>
+        Model buildup, washoff, and sweeping removal using
+        exponential equations and real storm data.
+        Predict pollutant accumulation, simulate sweeping strategies,
+        and review dashboards showing total buildup, washoff, and
+        pollutant reduction performance.
+    </p>
+</div>
+
+<!-- PRIORITIZE MODAL -->
+<div id="prioritizeModal" class="modal-panel">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2>Prioritize Module</h2>
+    <p>
+        Rank road segments by environmental and social factors.
+        Apply weighted criteria such as land use, canopy coverage,
+        and neighborhood features to identify high-priority streets
+        that provide the largest water-quality benefit when swept.
+    </p>
+</div>
+
+<!-- OPTIMIZE MODAL -->
+<div id="optimizeModal" class="modal-panel">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2>Optimize Module</h2>
+    <p>
+        Coming Soon — This module will calculate the most
+        cost-effective sweeping schedules based on pollutant
+        reduction performance and operational constraints.
+    </p>
+</div>
+
+<script>
+function openModal(id) {
+    document.getElementById("modalOverlay").classList.add("show");
+    document.getElementById(id).classList.add("show");
+}
+
+function closeModal() {
+    document.getElementById("modalOverlay").classList.remove("show");
+    document.querySelectorAll(".modal-panel").forEach(m => m.classList.remove("show"));
+}
+</script>
 
 </body>
+
+
 </html>
