@@ -773,6 +773,74 @@ a.primary {
   font-size: clamp(0.95rem, 0.3vw + 0.9rem, 1.1rem);
 }
 
+/* ================================ */
+/*           SWPT FOOTER            */
+/* ================================ */
+
+.swpt-footer {
+    background-color: var(--swpt-azure);
+    color: #ffffff;
+    padding: 20px 20px;
+    font-size: clamp(0.95rem, 0.3vw + 0.9rem, 1.1rem);
+}
+
+.swpt-footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.swpt-footer-brand img {
+    width: 250px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.swpt-footer-brand p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+
+.swpt-footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    margin-bottom: 20px;
+}
+
+.swpt-footer-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure Lucide icons render in white inside SWPT footer */
+.swpt-footer-icon svg {
+    stroke: #ffffff !important;
+    stroke-width: 1.5 !important;
+    width: 30px;
+    height: 30px;
+}
+
+.swpt-footer-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.8;
+}
+
+.swpt-footer-copy {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-top: 10px;
+}
+
+
 .fixed-back-btn {
   position: fixed;
   right: 12px;

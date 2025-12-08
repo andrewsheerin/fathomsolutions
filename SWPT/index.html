@@ -178,11 +178,49 @@
 </section>
 
 
+<!-- ============================== -->
+<!--            FOOTER             -->
+<!-- ============================== -->
+<footer class="swpt-footer">
+    <div class="swpt-footer-inner">
 
-<!-- FOOTER -->
-<footer class="home-footer">
-    © 2025 SWPT
+        <div class="swpt-footer-brand">
+            <a href="#top" onclick="event.preventDefault(); window.scrollTo({top:0, behavior: 'smooth'});">
+                <img src="../static/images/swpt-logo-cropped.png" alt="SWPT Logo">
+            </a>
+            <p>Cleaning Roads for Reduced Pollution Loads</p>
+        </div>
+
+        <div class="swpt-footer-links">
+
+            <!-- Phone (copy to clipboard) -->
+            <button class="swpt-footer-icon copy-action"
+                data-copy="401-626-6827"
+                data-label="Phone copied!">
+                <i data-lucide="phone"></i>
+            </button>
+
+            <!-- Email (copy to clipboard) -->
+            <button class="swpt-footer-icon copy-action"
+                data-copy="asheerin@fathomsolutions.dev"
+                data-label="Email copied!">
+                <i data-lucide="mail"></i>
+            </button>
+
+            <!-- LinkedIn -->
+            <a
+                href="https://www.linkedin.com/showcase/swpt-app/"
+                target="_blank"
+                rel="noopener"
+                class="swpt-footer-icon">
+                <i data-lucide="linkedin"></i>
+            </a>
+        </div>
+
+        <p class="swpt-footer-copy">© 2025 Fathom Solutions</p>
+    </div>
 </footer>
+
 
 <!-- Logout Button -->
 <a href="index.html" class="fixed-back-btn">Back to Fathom</a>
@@ -275,6 +313,36 @@ document.getElementById("contactForm").addEventListener("submit", async function
     }, 5000);
 });
 </script>
+
+<script>
+// Copy to clipboard interactions
+document.querySelectorAll(".copy-action").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const text = btn.getAttribute("data-copy");
+        const label = btn.getAttribute("data-label");
+
+        navigator.clipboard.writeText(text);
+
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = `<span style="font-size:0.9rem">${label}</span>`;
+        btn.style.pointerEvents = "none";
+
+        setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.style.pointerEvents = "auto";
+            if (window.lucide) lucide.createIcons(); // re-render icons
+        }, 1300);
+    });
+});
+</script>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+    if (window.lucide) lucide.createIcons();
+});
+</script>
+
 
 
 </body>
