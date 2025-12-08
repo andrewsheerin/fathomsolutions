@@ -158,7 +158,7 @@
 <section class="contact-section">
     <h2 class="section-title">Contact Us</h2>
 
-    <form action="https://formsubmit.co/asheerin@fathomsolutions.dev" method="POST" class="contact-form">
+    <form id="contactForm" class="contact-form">
 
         <!-- Prevent spam -->
         <input type="hidden" name="_captcha" value="false">
@@ -241,6 +241,41 @@ function closeModal() {
     document.querySelectorAll(".modal-panel").forEach(m => m.classList.remove("show"));
 }
 </script>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", async function(e) {
+    e.preventDefault();  // prevent page reload
+
+    const form = e.target;
+    const submitBtn = form.querySelector(".contact-submit");
+
+    // Collect form data
+    const formData = new FormData(form);
+
+    // Send using AJAX to FormSubmit
+    await fetch("https://formsubmit.co/asheerin@fathomsolutions.dev", {
+        method: "POST",
+        body: formData
+    });
+
+    // Button success styling
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = "Message Submitted!";
+    submitBtn.style.backgroundColor = "#2ecc71";  // green
+    submitBtn.disabled = true;
+
+    // Reset form fields
+    form.reset();
+
+    // Reset button after 5 seconds
+    setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.style.backgroundColor = "";
+        submitBtn.disabled = false;
+    }, 5000);
+});
+</script>
+
 
 </body>
 
