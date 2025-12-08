@@ -1,0 +1,802 @@
+/* =======================================================
+   SWPT LANDING PAGE STYLES
+   - Storm Water Pollution Tracker
+   - Responsive, token-based, flex-wrap layouts
+   ======================================================= */
+
+/* ---------------------------------------
+   1. DESIGN TOKENS (COLORS, TYPE, SPACING)
+---------------------------------------- */
+
+:root {
+  /* Brand Colors */
+  --swpt-azure: #0068E7;
+  --swpt-azure-dark: #0055c3;
+  --swpt-slate: #214156;
+  --swpt-slate-dark: #1e2835;
+  --swpt-card-bg: #26394d;
+  --swpt-text-light: #ffffff;
+  --swpt-text-muted: #dbe7f2;
+
+  /* Radii */
+  --swpt-radius-sm: 5px;
+  --swpt-radius-md: 10px;
+  --swpt-radius-lg: 20px;
+  --swpt-radius-xl: 30px;
+
+  /* Shadows */
+  --swpt-shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.25);
+  --swpt-shadow-med: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --swpt-shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.45);
+
+  /* Layout */
+  --swpt-max-width: 1100px;
+  --swpt-page-padding-x: clamp(16px, 4vw, 64px);
+  --swpt-section-padding-y: clamp(48px, 6vw, 72px);
+  --swpt-header-height: 70px;
+
+  /* Typography scale (fluid) */
+  /*--swpt-font-body: clamp(min, fluid, max)*/
+  --swpt-font-body: clamp(0.95rem, 0.3vw + 0.9rem, 1.05rem);
+  --swpt-font-body-sm: clamp(0.85rem, 0.3vw + 0.75rem, 0.98rem);
+  --swpt-font-h1: clamp(2.4rem, 2.5vw + 1.8rem, 3.4rem);
+  --swpt-font-h2: clamp(1.8rem, 1.8vw + 1.4rem, 2.6rem);
+  --swpt-font-h3: clamp(1.3rem, 1.3vw + 1.1rem, 1.7rem);
+  --swpt-font-hero-title: clamp(1.3rem, 1.4vw + 0.9rem, 3.2rem);
+  --swpt-font-hero-sub: clamp(0.9rem, 1.0vw + 0.8rem, 1.6rem);
+  --swpt-font-section-title: clamp(1.9rem, 1.6vw + 1.5rem, 2.4rem);
+  --swpt-font-impact: clamp(1.3rem, 1.4vw + 1.1rem, 1.9rem);
+
+  /* Line heights */
+  --swpt-lh-tight: 1.2;
+  --swpt-lh-normal: 1.5;
+  --swpt-lh-relaxed: 1.6;
+}
+
+/* ---------------------------------------
+   2. GLOBAL BASE / RESET
+---------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--swpt-slate);
+  font-family: "Montserrat", sans-serif;
+  font-size: var(--swpt-font-body);
+  line-height: var(--swpt-lh-normal);
+  color: var(--swpt-text-light);
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.5em;
+  font-weight: 600;
+  color: var(--swpt-text-light);
+}
+
+h1 {
+  font-size: var(--swpt-font-h1);
+}
+
+h2 {
+  font-size: var(--swpt-font-h2);
+}
+
+h3 {
+  font-size: var(--swpt-font-h3);
+}
+
+p {
+  margin: 0 0 0.75em;
+  font-size: var(--swpt-font-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Utility container (if needed later) */
+.swpt-container {
+  width: min(var(--swpt-max-width), 100% - 2 * var(--swpt-page-padding-x));
+  margin: 0 auto;
+}
+
+/* ---------------------------------------
+   3. HEADER
+---------------------------------------- */
+
+.home-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--swpt-header-height);
+  background-color: var(--swpt-azure);
+  color: var(--swpt-text-light);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(12px, 3vw, 24px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.home-header h1 {
+  margin: 0;
+  font-size: clamp(1.0rem, 1.1vw + 0.6rem, 1.6rem);
+  font-weight: 550;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-link {
+  text-decoration: none;
+  color: var(--swpt-text-light);
+  display: inline-flex;
+  align-items: center;
+}
+
+.home-logo {
+  height: clamp(48px, 4vh, 54px);
+  width: auto;
+  vertical-align: middle;
+  margin-right: 4px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.home-logo:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* ============= MOBILE HEADER ============= */
+@media (max-width: 650px) {
+  /* Keep the H1 for the logo, but hide the text by shrinking its font */
+  .home-header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    font-size: 0;          /* hides the text node, NOT the image */
+  }
+
+  /* Center the logo */
+  .home-logo {
+    margin: 0;
+    height: clamp(40px, 6vh, 52px);
+  }
+
+  /* Center things overall and leave room on the right for the back button */
+  .home-header {
+    justify-content: flex-start;
+    padding-left: 16px;
+    padding-right: 64px;   /* space where the back button sits */
+  }
+
+  /* Position the Back to Fathom button in the top-right of the header */
+  .fixed-back-btn {
+    position: fixed;       /* stays pinned in the viewport */
+    top: 8px;
+    right: 12px;
+    margin: 0;
+    padding: 8px 12px;
+    font-size: clamp(0.8rem, 1vw + 0.6rem, 0.95rem);
+  }
+}
+
+
+/* ---------------------------------------
+   4. BUTTONS (PRIMARY / SECONDARY)
+---------------------------------------- */
+
+.primary {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  font-size: clamp(0.95rem, 0.4vw + 0.9rem, 1rem);
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--swpt-radius-sm);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.15s, box-shadow 0.15s;
+  background-color: var(--swpt-azure);
+  color: var(--swpt-text-light);
+  text-align: center;
+  text-decoration: none;
+}
+
+.primary:hover {
+  background: var(--swpt-azure-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+a.primary {
+  box-sizing: border-box;
+}
+
+.secondary {
+  display: inline-block;
+  padding: 8px 18px;
+  margin-left: 10px;
+  font-size: var(--swpt-font-body);
+  color: var(--swpt-azure);
+  background: #fff;
+  border: 2px solid var(--swpt-azure);
+  border-radius: var(--swpt-radius-sm);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.secondary:hover {
+  background: var(--swpt-azure);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ---------------------------------------
+   5. HERO SECTION
+---------------------------------------- */
+
+.hero-section {
+  min-height: 100vh;
+  padding-top: var(--swpt-header-height);
+
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url('/static/images/asphalt-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--swpt-page-padding-x);
+}
+
+.hero-inner {
+  text-align: center;
+  max-width: 900px;
+  background: rgba(245, 245, 245, 0.35);
+  border-radius: var(--swpt-radius-xl);
+  padding: clamp(24px, 4vw, 40px) clamp(20px, 4vw, 40px);
+  box-shadow: var(--swpt-shadow-med);
+  backdrop-filter: blur(4px);
+}
+
+.hero-title {
+  font-size: var(--swpt-font-hero-title);
+  font-weight: 750;
+  color: #ffffff;
+  margin-bottom: clamp(16px, 2vw, 22px);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.hero-subtitle {
+  font-size: var(--swpt-font-hero-sub);
+  font-weight: 450;
+  color: #ffffff;
+  line-height: var(--swpt-lh-relaxed);
+  margin-bottom: clamp(32px, 4vw, 40px);
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 24px);
+  flex-wrap: wrap; /* allow wrap only when truly needed */
+}
+
+/* Override the generic .primary styles in the hero context */
+.hero-buttons .hero-btn {
+  width: auto;
+  margin: 0;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.hero-btn {
+  font-size: clamp(1.05rem, 0.7vw + 1rem, 1.35rem) !important;
+  padding: clamp(12px, 1.5vw + 8px, 16px) clamp(24px, 2vw + 20px, 36px) !important;
+  border-radius: var(--swpt-radius-md);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background-color: var(--swpt-azure);
+  transition: 0.25s ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-3px);
+  background-color: var(--swpt-azure-dark);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Hero responsive tweaks */
+@media (max-width: 640px) {
+  .hero-inner {
+    padding-inline: clamp(16px, 4vw, 24px);
+  }
+
+  .hero-subtitle {
+    max-width: 100%;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primary.hero-btn {
+    width: 100%;
+  }
+}
+
+
+/* ---------------------------------------
+   6. SECTION TITLES (WHY / MODULES / HOW)
+---------------------------------------- */
+
+.section-title {
+  text-align: center;
+  color: #ffffff;
+  font-size: var(--swpt-font-section-title);
+  margin-bottom: clamp(24px, 3vw, 35px);
+}
+
+/* ---------------------------------------
+   7. WHY SECTION
+---------------------------------------- */
+
+.why-section {
+  padding: var(--swpt-section-padding-y) var(--swpt-page-padding-x);
+  background-color: var(--swpt-slate);
+}
+
+.why-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(20px, 3vw, 40px);
+  margin: 0 auto;
+  max-width: var(--swpt-max-width);
+}
+
+.why-card {
+  flex: 1 1 clamp(260px, 30%, 340px);
+  max-width: 340px;
+  text-align: center;
+}
+
+
+.why-img {
+  width: 100%;
+  height: clamp(180px, 24vh, 220px);
+  object-fit: cover;
+  border-radius: var(--swpt-radius-md);
+  box-shadow: var(--swpt-shadow-soft);
+}
+
+.why-text {
+  color: #ffffff;
+  margin-top: 12px;
+  font-size: clamp(1rem, 0.3vw + 1rem, 1.15rem);
+  line-height: var(--swpt-lh-relaxed);
+  letter-spacing: 0.05em;
+  text-align: left;
+}
+
+/* ---------------------------------------
+   8. MODULES SECTION
+---------------------------------------- */
+
+.modules-section {
+  padding: var(--swpt-section-padding-y) var(--swpt-page-padding-x);
+  background-color: var(--swpt-slate-dark);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)),
+    url('/static/images/road-network-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.modules-section .section-title {
+  color: var(--swpt-slate);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 12px 20px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto clamp(28px, 4vw, 40px) auto;
+}
+
+.modules-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(20px, 3vw, 30px);
+  margin: 0 auto;
+  max-width: var(--swpt-max-width);
+}
+
+.module-card {
+  flex: 1 1 clamp(260px, 30%, 340px);
+  max-width: 340px;
+  background: var(--swpt-card-bg);
+  padding: clamp(20px, 3vw, 28px) 18px;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid var(--swpt-azure);
+  box-shadow: var(--swpt-shadow-med);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.module-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Icon wrapper */
+.module-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+/* Icon image */
+.module-icon-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: inline-block;
+}
+
+/* Card heading */
+.module-card h3 {
+  color: #ffffff;
+  font-size: clamp(1.15rem, 0.6vw + 1rem, 1.4rem);
+  margin-bottom: 10px;
+}
+
+/* Card text */
+.module-card p {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--swpt-text-muted);
+  font-size: clamp(0.95rem, 0.25vw + 0.9rem, 1.02rem);
+  line-height: var(--swpt-lh-normal);
+  letter-spacing: 0.04em;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+/* Module CTA button */
+.module-button {
+  width: 50%;
+  min-width: 120px;
+  display: block;
+  margin: 0 auto;
+  font-size: clamp(0.9rem, 0.3vw + 0.85rem, 1rem);
+  font-weight: 600;
+  padding: 7px 10px;
+  border: none;
+  border-radius: var(--swpt-radius-sm);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.15s, box-shadow 0.15s;
+  background-color: var(--swpt-azure);
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.module-button:hover {
+  background: var(--swpt-azure-dark);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: var(--swpt-shadow-soft);
+}
+
+/* ---------------------------------------
+   9. HOW IT WORKS SECTION
+---------------------------------------- */
+
+.how-section {
+  padding: var(--swpt-section-padding-y) var(--swpt-page-padding-x);
+  background-color: var(--swpt-slate);
+}
+
+.how-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(20px, 3vw, 30px);
+  margin: 0 auto;
+  max-width: var(--swpt-max-width);
+}
+
+.how-step {
+  flex: 1 1 clamp(260px, 30%, 340px);
+  max-width: 320px;
+  background: var(--swpt-card-bg);
+  border-radius: 12px;
+  border: 2px solid var(--swpt-azure);
+  box-shadow: var(--swpt-shadow-med);
+  padding: clamp(20px, 3vw, 28px) 18px;
+  text-align: center;
+}
+
+.step-circle {
+  width: 48px;
+  height: 48px;
+  background-color: var(--swpt-azure);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(1.1rem, 0.4vw + 1rem, 1.3rem);
+  font-weight: 700;
+  margin: 0 auto 14px auto;
+}
+
+.how-step h3 {
+  color: #ffffff;
+  font-size: clamp(1.1rem, 0.5vw + 1rem, 1.25rem);
+  margin-bottom: 10px;
+}
+
+.how-step p {
+  color: var(--swpt-text-muted);
+  font-size: var(--swpt-font-body-sm);
+  line-height: var(--swpt-lh-normal);
+}
+
+/* ---------------------------------------
+   10. IMPACT SECTION
+---------------------------------------- */
+
+.impact-section {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+    url('/static/images/clean-water-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding: clamp(40px, 6vw, 60px) clamp(24px, 8vw, 80px);
+  text-align: center;
+  min-height: 40vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.impact-section p {
+  color: #e1ecf2;
+  font-size: var(--swpt-font-impact);
+  font-weight: 600;
+  line-height: var(--swpt-lh-relaxed);
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+/* On small screens, let it be more centered than justified */
+@media (max-width: 640px) {
+  .impact-section p {
+    text-align: left;
+  }
+}
+
+/* ---------------------------------------
+   11. CONTACT SECTION
+---------------------------------------- */
+
+.contact-section {
+    padding: 60px 20px;
+    background: var(--swpt-slate-dark);
+    text-align: center;
+}
+
+.contact-form {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-row {
+    display: flex;
+    gap: 16px;
+}
+
+.contact-row input {
+    flex: 1;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-submit {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+
+
+/* ---------------------------------------
+   12. MODAL SYSTEM
+---------------------------------------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modal panel */
+.modal-panel {
+  position: fixed;
+  left: 50%;
+  bottom: -70%;
+  transform: translateX(-50%);
+  width: min(700px, 90%);
+  max-height: 70vh;
+
+  background: var(--swpt-slate-dark);
+  border: 3px solid var(--swpt-azure);
+  border-radius: 20px 20px 0 0;
+  color: #ffffff;
+  padding: 28px 24px 24px;
+  box-shadow: var(--swpt-shadow-strong);
+  z-index: 1001;
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: bottom 0.35s ease-out;
+}
+
+.modal-panel.show {
+  bottom: 10%;
+}
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.modal-close:hover {
+  transform: scale(1.15);
+}
+
+.modal-panel h2 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-size: clamp(1.5rem, 1.2vw + 1.2rem, 2rem);
+  color: #80b7ff;
+  text-align: center;
+}
+
+.modal-panel p {
+  font-size: clamp(1rem, 0.4vw + 0.95rem, 1.2rem);
+  line-height: var(--swpt-lh-relaxed);
+  margin-top: 8px;
+}
+
+/* On very small screens, let modal sit higher and be taller */
+@media (max-width: 600px) {
+  .modal-panel {
+    bottom: -80%;
+    max-height: 80vh;
+    padding-inline: 18px;
+  }
+
+  .modal-panel.show {
+    bottom: 5%;
+  }
+}
+
+/* ---------------------------------------
+   13. FOOTER & FIXED BACK BUTTON
+---------------------------------------- */
+
+.home-footer {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--swpt-azure);
+  color: #ffffff;
+  font-size: clamp(0.95rem, 0.3vw + 0.9rem, 1.1rem);
+}
+
+.fixed-back-btn {
+  position: fixed;
+  right: 12px;
+  top: 12px;
+  z-index: 1100;
+  background: var(--swpt-azure);
+  color: #ffffff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: clamp(0.72rem, 0.6vw + 0.6rem, 1rem);
+  padding: clamp(6px, 0.7vw + 4px, 10px) clamp(10px, 1vw + 8px, 18px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background 0.2s, transform 0.15s;
+}
+
+.fixed-back-btn:hover {
+  background: var(--swpt-azure-dark);
+  transform: translateY(-2px);
+}
+
+
+.fixed-back-btn:focus {
+  outline: 3px solid rgba(0, 104, 231, 0.25);
+  outline-offset: 2px;
+}
