@@ -714,6 +714,13 @@ a.primary {
   bottom: 10%;
 }
 
+.swpt-modal-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+}
+
 /* Close button */
 .modal-close {
   position: absolute;
