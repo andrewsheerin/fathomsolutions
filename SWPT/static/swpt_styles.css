@@ -391,15 +391,15 @@ a.primary {
 }
 
 .why-card {
-  flex: 1 1 clamp(260px, 30%, 340px);
-  max-width: 340px;
+  flex: 1 1 clamp(300px, 30%, 400px);
+  max-width: 500px;
   text-align: center;
 }
 
 
 .why-img {
   width: 100%;
-  height: clamp(180px, 24vh, 220px);
+  height: clamp(250px, 24vh, 400px);
   object-fit: cover;
   border-radius: var(--swpt-radius-md);
   box-shadow: var(--swpt-shadow-soft);
@@ -408,7 +408,7 @@ a.primary {
 .why-text {
   color: #ffffff;
   margin-top: 12px;
-  font-size: clamp(1rem, 0.3vw + 1rem, 1.15rem);
+  font-size: clamp(1rem, 0.3vw + 1rem, 1.10rem);
   line-height: var(--swpt-lh-relaxed);
   letter-spacing: 0.05em;
   text-align: left;
