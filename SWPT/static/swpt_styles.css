@@ -581,6 +581,13 @@ a.primary {
   line-height: var(--swpt-lh-normal);
 }
 
+.how-note {
+  margin-top: clamp(24px, 3vw, 32px);
+  font-size: var(  --swpt-font-h3);
+  color: white;
+  text-align: center;
+}
+
 /* ---------------------------------------
    10. IMPACT SECTION
 ---------------------------------------- */
