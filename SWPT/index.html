@@ -10,33 +10,170 @@
 
 <body id="top">
 
-<!-- HEADER (kept exactly as before) -->
-<header class="home-header">
-    <h1>
-        <a href="#top" class="home-link" onclick="event.preventDefault(); window.scrollTo({top:0, behavior: 'smooth'});">
-            <img src="../static/images/swpt-logo-cropped.png" alt="SWPT Logo" class="home-logo">
-        </a>
-        Storm Water Pollution Tracker
-    </h1>
+<!-- HEADER -->
+<header class="home-header" role="banner" aria-label="SWPT header">
+    <a href="#top" class="home-link home-brand" onclick="event.preventDefault(); window.scrollTo({top:0, behavior: 'smooth'});" aria-label="SWPT home">
+        <img src="../static/images/swpt-logo-cropped.png" alt="SWPT Logo" class="home-logo">
+        <span class="home-title">Storm Water Pollution Tracker</span>
+    </a>
+
+    <!-- Desktop nav (shows on larger screens) -->
+    <nav class="home-nav" aria-label="SWPT navigation">
+        <a href="#video" class="home-nav-link">Video</a>
+        <a href="#why" class="home-nav-link">Why</a>
+        <a href="#modules" class="home-nav-link">Modules</a>
+        <a href="#how" class="home-nav-link">How</a>
+        <a href="#contact" class="home-nav-cta">Contact</a>
+        <a href="../" class="home-nav-cta">Back to Fathom</a>
+    </nav>
+
+    <!-- Mobile menu button -->
+    <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open menu"
+        aria-controls="mobileMenu"
+        aria-expanded="false">
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+    </button>
 </header>
 
+<!-- Mobile menu panel -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__panel" role="dialog" aria-label="Site menu">
+        <div class="mobile-menu__header">
+            <span class="mobile-menu__title">Menu</span>
+            <button class="mobile-menu__close" id="menuClose" type="button" aria-label="Close menu">×</button>
+        </div>
+
+        <div class="mobile-menu__links">
+            <a href="#top" class="mobile-menu__link">Home</a>
+            <a href="#video" class="mobile-menu__link">Video</a>
+            <a href="#why" class="mobile-menu__link">Why it matters</a>
+            <a href="#modules" class="mobile-menu__link">Modules</a>
+            <a href="#how" class="mobile-menu__link">How it works</a>
+            <a href="#impact" class="mobile-menu__link">Impact</a>
+        </div>
+
+        <div class="mobile-menu__actions">
+            <a href="#contact" class="mobile-menu__cta">Contact</a>
+            <a href="../" class="mobile-menu__secondary">Back to Fathom</a>
+        </div>
+    </div>
+</div>
 
 
 <!-- ============================== -->
 <!--       HERO SECTION             -->
 <!-- ============================== -->
-<section class="hero-section">
-    <div class="hero-inner">
-        <h1 class="hero-title">Clean Streets = Clean Water</h1>
-        <p class="hero-subtitle">
-            Data-driven tools to improve sweeping efficiency, reduce stormwater pollution,
-            and optimize municipal operations.
+<section id="hero" class="hero-section hero-section--saas">
+    <div class="hero-inner hero-inner--saas">
+
+        <div class="hero-badge">
+            <!-- Simple sparkle mark so we don't need new icon libraries here -->
+            <span class="hero-badge__icon" aria-hidden="true">✦</span>
+            SaaS Platform • SWPT = Storm Water Pollution Tracker
+        </div>
+
+        <h1 class="hero-title hero-title--saas">Cleaner water starts with smarter street sweeping.</h1>
+        <p class="hero-subtitle hero-subtitle--saas">
+            SWPT helps states and municipalities plan, prioritize, and optimize sweeping using data-driven
+            modeling, so you can reduce stormwater pollution, improve operational efficiency,
+            defend BMP performance, and meet stormwater compliance goals.
         </p>
 
-        <div class="hero-buttons">
-            <button class="primary hero-btn" onclick="openModal('simulateModal')">Simulate</button>
-            <button class="primary hero-btn" onclick="openModal('prioritizeModal')">Prioritize</button>
-            <button class="primary hero-btn" onclick="openModal('optimizeModal')">Optimize</button>
+        <div class="hero-buttons hero-buttons--saas">
+            <a href="#contact" class="hero-btn hero-btn--primary">
+                Schedule a demo
+                <span class="hero-btn__icon" aria-hidden="true">→</span>
+            </a>
+        </div>
+
+        <div class="hero-metrics">
+            <div class="hero-metric">
+                <div class="hero-metric__value">MS4-ready</div>
+                <div class="hero-metric__label">Reporting + defensible insights</div>
+            </div>
+            <div class="hero-metric">
+                <div class="hero-metric__value">Data-driven</div>
+                <div class="hero-metric__label">Science backed modeling</div>
+            </div>
+            <div class="hero-metric">
+                <div class="hero-metric__value">GIS-based</div>
+                <div class="hero-metric__label">Power of geospatial data</div>
+            </div>
+        </div>
+
+        <div class="hero-proof">
+            Built for municipality public works divisions and state departments of transportation
+            • Works with existing sweeping programs but transforms their impact
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- ============================== -->
+<!--         VIDEO SECTION          -->
+<!-- ============================== -->
+<section id="video" class="landing-section landing-section--video" aria-label="SWPT product video">
+    <div class="video-card">
+        <h2 class="section-title">See SWPT in action</h2>
+        <p class="section-subtitle">
+            A quick walkthrough of the web app experience.
+        </p>
+
+        <!--
+          Performance notes:
+          - The MP4 is very large, so we do NOT include a <source> initially.
+          - We only set the video src after a user gesture (click), which avoids a massive initial download.
+          - If you add a poster image later, set data-poster="/static/images/<your-poster>.jpg" for instant preview.
+        -->
+        <div class="video-shell" id="swptVideoShell" role="button" tabindex="0" aria-label="Play SWPT demo video">
+            <div class="video-overlay">
+                <div class="video-play" aria-hidden="true">
+                    <span class="video-play__icon">▶</span>
+                    <span class="video-play__label">Play</span>
+                </div>
+            </div>
+
+            <video
+                id="swptVideo"
+                class="swpt-video"
+                controls
+                preload="none"
+                playsinline
+                data-src="/static/videos/SWPT%20Web%20App.mp4"
+            ></video>
+        </div>
+
+        <div class="video-chapters" aria-label="Video chapters">
+            <div class="video-chapters__grid">
+                <button type="button" class="chapter-chip" data-seek="8">
+                    <span class="chapter-chip__time">0:08</span>
+                    <span class="chapter-chip__label">About</span>
+                </button>
+                <button type="button" class="chapter-chip" data-seek="31">
+                    <span class="chapter-chip__time">0:31</span>
+                    <span class="chapter-chip__label">Dashboard</span>
+                </button>
+                <button type="button" class="chapter-chip" data-seek="51">
+                    <span class="chapter-chip__time">0:51</span>
+                    <span class="chapter-chip__label">Simulate</span>
+                </button>
+                <button type="button" class="chapter-chip" data-seek="93">
+                    <span class="chapter-chip__time">1:33</span>
+                    <span class="chapter-chip__label">Prioritize</span>
+                </button>
+                <button type="button" class="chapter-chip" data-seek="123">
+                    <span class="chapter-chip__time">2:03</span>
+                    <span class="chapter-chip__label">Upload</span>
+                </button>
+            </div>
         </div>
     </div>
 </section>
@@ -46,7 +183,7 @@
 <!-- ============================== -->
 <!--     WHY IT MATTERS            -->
 <!-- ============================== -->
-<section class="why-section">
+<section id="why" class="why-section">
     <h2 class="section-title">Why Street Sweeping Matters</h2>
 
     <div class="why-row">
@@ -77,7 +214,7 @@
 <!-- ============================== -->
 <!--     MODULE CARDS              -->
 <!-- ============================== -->
-<section class="modules-section">
+<section id="modules" class="modules-section">
     <h2 class="section-title">What You Can Do with SWPT</h2>
 
     <div class="modules-row">
@@ -117,7 +254,7 @@
 <!-- ============================== -->
 <!--     HOW IT WORKS              -->
 <!-- ============================== -->
-<section class="how-section">
+<section id="how" class="how-section">
     <h2 class="section-title">How SWPT Works</h2>
 
     <div class="how-row">
@@ -153,7 +290,7 @@
 <!-- ============================== -->
 <!--     IMPACT STATEMENT           -->
 <!-- ============================== -->
-<section class="impact-section">
+<section id="impact" class="impact-section">
     <p>
         SWPT empowers municipalities to make smarter sweeping decisions, reduce stormwater pollution,
         and justify BMP performance with defendable, data-driven reporting.
@@ -163,26 +300,59 @@
 <!-- ============================== -->
 <!--        CONTACT SECTION         -->
 <!-- ============================== -->
-<section class="contact-section">
-    <h2 class="section-title">Contact Us</h2>
+<section id="contact" class="contact-section landing-section landing-section--contact">
+    <div class="contact-card">
+        <h2 class="section-title section-title--left">Schedule a demo, start a pilot, or contact us</h2>
+        <p class="landing-body">
+            Tell us about your stormwater program and what you'd like to accomplish. Or offer ideas for features that would be useful for you.
+        </p>
 
-    <form id="contactForm" class="contact-form">
-
-        <!-- Prevent spam -->
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="box">
-
-        <div class="contact-row">
-            <input type="text" name="Name" placeholder="Your Name" required>
-            <input type="text" name="Company" placeholder="Company">
+        <div class="contact-type" role="tablist" aria-label="Contact request type">
+            <button type="button" class="contact-pill contact-pill--active" data-contact-type="demo">Demo</button>
+            <button type="button" class="contact-pill" data-contact-type="pilot">Pilot</button>
+            <button type="button" class="contact-pill" data-contact-type="message">Message</button>
         </div>
 
-        <input type="text" name="Subject" placeholder="Subject" required>
+        <form id="contactForm" class="contact-form contact-grid">
 
-        <textarea name="Message" placeholder="Comment" rows="5" required></textarea>
+            <!-- Prevent spam -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="box">
 
-        <button type="submit" class="primary contact-submit">Send Message</button>
-    </form>
+            <!-- Used to change the email subject based on pill selection -->
+            <input type="hidden" name="ContactType" id="contactTypeField" value="demo">
+
+            <label class="contact-field">
+                <span>Name</span>
+                <input type="text" name="Name" placeholder="Your name" required>
+            </label>
+
+            <label class="contact-field">
+                <span>Organization</span>
+                <input type="text" name="Company" placeholder="City, firm, or agency">
+            </label>
+
+            <label class="contact-field">
+                <span>Email</span>
+                <input type="email" name="Email" placeholder="name@org.gov">
+            </label>
+
+            <label class="contact-field contact-field--full">
+                <span>Message</span>
+                <textarea name="Message" placeholder="Example: We want to justify sweeping as a BMP in our MS4 annual report, and target hotspots near impaired waters." rows="5" required></textarea>
+            </label>
+
+            <!-- Keep Subject for your existing handler; we set it automatically via JS below -->
+            <input type="hidden" name="Subject" id="subjectField" value="SWPT (Storm Water Pollution Tracker) – Schedule a demo">
+
+            <div class="contact-actions contact-field--full">
+                <button type="submit" class="hero-btn contact-btn--primary contact-submit">Send message</button>
+                <a class="hero-btn contact-btn--primary" href="https://calendly.com/asheerin97/30min" target="_blank" rel="noreferrer">Open scheduler</a>
+            </div>
+
+
+        </form>
+    </div>
 </section>
 
 
@@ -230,8 +400,6 @@
 </footer>
 
 
-<!-- Logout Button -->
-<a href="index.html" class="fixed-back-btn">Back to Fathom</a>
 
 <!-- ============================== -->
 <!--        MODULE MODALS          -->
@@ -298,6 +466,41 @@ function closeModal() {
 </script>
 
 <script>
+// Contact type pills -> update hidden fields for email subject/context
+(function() {
+    const root = document.getElementById('contact');
+    if (!root) return;
+
+    const pills = root.querySelectorAll('.contact-pill');
+    const contactTypeField = document.getElementById('contactTypeField');
+    const subjectField = document.getElementById('subjectField');
+
+    const computeSubject = (type) => {
+        const prefix = 'SWPT (Storm Water Pollution Tracker)';
+        if (type === 'pilot') return `${prefix} – Pilot request`;
+        if (type === 'message') return `${prefix} – Message`;
+        return `${prefix} – Schedule a demo`;
+    };
+
+    const setActive = (type) => {
+        pills.forEach(p => p.classList.toggle('contact-pill--active', p.getAttribute('data-contact-type') === type));
+        if (contactTypeField) contactTypeField.value = type;
+        if (subjectField) subjectField.value = computeSubject(type);
+    };
+
+    pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const type = pill.getAttribute('data-contact-type') || 'demo';
+            setActive(type);
+        });
+    });
+
+    // Initialize
+    setActive('demo');
+})();
+</script>
+
+<script>
 document.getElementById("contactForm").addEventListener("submit", async function(e) {
     e.preventDefault();  // prevent page reload
 
@@ -329,6 +532,168 @@ document.getElementById("contactForm").addEventListener("submit", async function
         submitBtn.disabled = false;
     }, 5000);
 });
+</script>
+
+<script>
+// Lazy-load the large MP4 only on user intent (click/keyboard).
+(function() {
+    const shell = document.getElementById('swptVideoShell');
+    const video = document.getElementById('swptVideo');
+    if (!shell || !video) return;
+
+    const ensureLoaded = () => {
+        if (!video.src) {
+            const src = video.getAttribute('data-src');
+            if (src) video.src = src;
+
+            // Optional poster support (add data-poster on the video tag later)
+            const poster = video.getAttribute('data-poster');
+            if (poster && !video.poster) video.poster = poster;
+        }
+    };
+
+    const safeSeek = async (seconds) => {
+        ensureLoaded();
+
+        // If metadata isn't ready yet, wait for it.
+        if (video.readyState < 1) {
+            await new Promise((resolve) => {
+                const onMeta = () => {
+                    video.removeEventListener('loadedmetadata', onMeta);
+                    resolve();
+                };
+                video.addEventListener('loadedmetadata', onMeta);
+            });
+        }
+
+        try {
+            video.currentTime = Math.max(0, seconds);
+        } catch (_) {
+            // Some browsers can throw if seeking before metadata; handled above.
+        }
+    };
+
+    const loadAndPlay = async () => {
+        ensureLoaded();
+        shell.classList.add('is-playing');
+        try {
+            await video.play();
+        } catch (_) {
+            // Autoplay may be blocked; user can press play in controls.
+        }
+    };
+
+    // Click anywhere on the shell to load+play
+    shell.addEventListener('click', loadAndPlay);
+    shell.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            loadAndPlay();
+        }
+    });
+
+    // If user hits the native play button directly, ensure src is set.
+    video.addEventListener('play', () => {
+        ensureLoaded();
+        shell.classList.add('is-playing');
+    });
+
+    // Chapters
+    document.querySelectorAll('.chapter-chip[data-seek]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+            const sec = parseFloat(btn.getAttribute('data-seek') || '0') || 0;
+            // Load, seek, then play
+            await safeSeek(sec);
+            await loadAndPlay();
+
+            // Keep the video in view
+            shell.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+})();
+</script>
+
+<script>
+// Mobile menu + smooth scrolling (header offset)
+(function() {
+    const header = document.querySelector('.home-header');
+    const menu = document.getElementById('mobileMenu');
+    const toggle = document.getElementById('menuToggle');
+    const closeBtn = document.getElementById('menuClose');
+
+    if (!menu || !toggle) return;
+
+    const setMenuOpen = (open) => {
+        menu.classList.toggle('is-open', open);
+        toggle.classList.toggle('is-open', open);
+        menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    };
+
+    toggle.addEventListener('click', () => {
+        const isOpen = menu.classList.contains('is-open');
+        setMenuOpen(!isOpen);
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => setMenuOpen(false));
+    }
+
+    // Close when clicking the dark overlay (but not the panel)
+    menu.addEventListener('click', (e) => {
+        if (e.target === menu) setMenuOpen(false);
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+            setMenuOpen(false);
+        }
+    });
+
+    const scrollToHash = (hash) => {
+        const id = (hash || '').replace('#', '');
+        if (!id) return;
+
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        const headerH = header ? header.getBoundingClientRect().height : 0;
+        const y = window.scrollY + el.getBoundingClientRect().top - headerH - 10;
+
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    };
+
+    // Smooth scroll for internal anchors (desktop + mobile)
+    const onNavClick = (e) => {
+        const a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+
+        const href = a.getAttribute('href');
+        if (!href || href === '#') return;
+
+        e.preventDefault();
+        setMenuOpen(false);
+
+        history.pushState(null, '', href);
+        scrollToHash(href);
+    };
+
+    document.addEventListener('click', onNavClick);
+
+    // If page loads with a hash, apply offset scroll
+    window.addEventListener('load', () => {
+        if (window.location.hash) {
+            // Delay for layout
+            setTimeout(() => scrollToHash(window.location.hash), 0);
+        }
+    });
+})();
 </script>
 
 <script>
