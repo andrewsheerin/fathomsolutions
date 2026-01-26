@@ -46,6 +46,7 @@
   --swpt-font-hero-sub: clamp(0.9rem, 1.0vw + 0.8rem, 1.6rem);
   --swpt-font-section-title: clamp(1.9rem, 1.6vw + 1.5rem, 2.4rem);
   --swpt-font-impact: clamp(1.3rem, 1.4vw + 1.1rem, 1.9rem);
+  --swpt-font-body-sm: clamp(0.5rem, 0.5vw + 0.8rem, 1.2rem);
 
   /* Line heights */
   --swpt-lh-tight: 1.2;
@@ -636,11 +637,13 @@ a.primary {
   background: rgba(0, 104, 231, 0.18);
   border: 1px solid rgba(0, 104, 231, 0.28);
   color: rgba(255, 255, 255, 0.92);
-  font-size: var(--swpt-font-body-sm);
+  font-size: clamp(0.5rem, 0.4vw + 0.75rem, 0.6rem);
   font-weight: 750;
   letter-spacing: 0.02em;
   margin: 0 auto 14px;
   width: fit-content;
+  /* dont allow text to wrap */
+    white-space: nowrap;
 }
 
 .hero-badge__icon {
@@ -729,7 +732,7 @@ button.hero-btn {
   padding: 15px;
   max-width: 600px;
   margin-top: 16px;
-  font-size: var(--swpt-font-body-md);
+  font-size: var(--swpt-font-body-sm);
   color: rgba(255, 255, 255, 0.82);
   margin: 0 auto;
 }
