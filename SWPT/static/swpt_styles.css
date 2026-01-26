@@ -425,6 +425,9 @@ a {
   font-weight: 850;
 }
 
+  .home-nav {
+    display: none;
+  }
 
 /* Responsive behavior */
 @media (max-width: 1000px) {
@@ -656,7 +659,7 @@ a.primary {
 .hero-subtitle--saas {
   max-width: 660px;
   color: rgba(255, 255, 255, 0.92);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 420;
 }
 
@@ -679,6 +682,7 @@ button.hero-btn {
   background-color: var(--swpt-azure);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
 }
 
 .hero-btn--ghost {
@@ -722,9 +726,12 @@ button.hero-btn {
 }
 
 .hero-proof {
+  padding: 15px;
+  max-width: 600px;
   margin-top: 16px;
-  font-size: var(--swpt-font-body-sm);
-  color: rgba(255, 255, 255, 0.72);
+  font-size: var(--swpt-font-body-md);
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0 auto;
 }
 
 @media (max-width: 900px) {

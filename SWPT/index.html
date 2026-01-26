@@ -22,7 +22,6 @@
         <a href="#video" class="home-nav-link">Video</a>
         <a href="#why" class="home-nav-link">Why</a>
         <a href="#modules" class="home-nav-link">Modules</a>
-        <a href="#how" class="home-nav-link">How</a>
         <a href="#contact" class="home-nav-cta">Contact</a>
         <a href="../" class="home-nav-cta">Back to Fathom</a>
     </nav>
@@ -50,11 +49,9 @@
         </div>
 
         <div class="mobile-menu__links">
-            <a href="#top" class="mobile-menu__link">Home</a>
-            <a href="#video" class="mobile-menu__link">Video</a>
-            <a href="#why" class="mobile-menu__link">Why it matters</a>
-            <a href="#modules" class="mobile-menu__link">Modules</a>
-            <a href="#how" class="mobile-menu__link">How it works</a>
+            <a href="#video" class="mobile-menu__link">Product</a>
+            <a href="#why" class="mobile-menu__link">Purpose</a>
+            <a href="#modules" class="mobile-menu__link">Solutions</a>
             <a href="#impact" class="mobile-menu__link">Impact</a>
         </div>
 
@@ -75,7 +72,7 @@
         <div class="hero-badge">
             <!-- Simple sparkle mark so we don't need new icon libraries here -->
             <span class="hero-badge__icon" aria-hidden="true">✦</span>
-            SaaS Platform • SWPT = Stormwater Pollution Tracker
+            SaaS Platform • Powered by Python and GIS
         </div>
 
         <h1 class="hero-title hero-title--saas">Cleaner water starts with smarter street sweeping.</h1>
@@ -108,8 +105,9 @@
         </div>
 
         <div class="hero-proof">
-            Built for municipality public works divisions and state departments of transportation
-            • Works with existing sweeping programs but transforms their impact
+            Built for municipality public works divisions and state departments of transportation.
+            We work with existing sweeping programs, not to disrupt their workflow, but to transform
+            their impact and provide measurable results.
         </div>
 
     </div>
@@ -123,9 +121,6 @@
 <section id="video" class="landing-section landing-section--video" aria-label="SWPT product video">
     <div class="video-card">
         <h2 class="section-title">See SWPT in action</h2>
-        <p class="section-subtitle">
-            A quick walkthrough of the web app experience.
-        </p>
 
         <!--
           Performance notes:
@@ -141,14 +136,8 @@
                 </div>
             </div>
 
-            <video
-                id="swptVideo"
-                class="swpt-video"
-                controls
-                preload="none"
-                playsinline
-                data-src="/static/videos/SWPT%20Web%20App.mp4"
-            ></video>
+            <div id="swptYoutubePlayer" class="swpt-video"></div>
+
         </div>
 
         <div class="video-chapters" aria-label="Video chapters">
@@ -255,34 +244,7 @@
 <!--     HOW IT WORKS              -->
 <!-- ============================== -->
 <section id="how" class="how-section">
-    <h2 class="section-title">How SWPT Works</h2>
 
-    <div class="how-row">
-
-        <div class="how-step">
-            <div class="step-circle">1</div>
-            <h3>Upload Road Network</h3>
-            <p>Provide a GeoJSON or ZIP shapefile of your city’s streets.</p>
-        </div>
-
-        <div class="how-step">
-            <div class="step-circle">2</div>
-            <h3>Configure Parameters</h3>
-            <p>Set sweeper efficiency, modules, land-use factors, and costs.</p>
-        </div>
-
-        <div class="how-step">
-            <div class="step-circle">3</div>
-            <h3>Generate Insights</h3>
-            <p>Maps, plots, dashboards, priorities, and performance summaries.</p>
-        </div>
-    </div>
-
-    <div class="how-note">
-        <h3>
-            Powered by Python and GIS programming.
-        </h3>
-    </div>
 </section>
 
 
@@ -310,7 +272,7 @@
         <div class="contact-type" role="tablist" aria-label="Contact request type">
             <button type="button" class="contact-pill contact-pill--active" data-contact-type="demo">Demo</button>
             <button type="button" class="contact-pill" data-contact-type="pilot">Pilot</button>
-            <button type="button" class="contact-pill" data-contact-type="message">Message</button>
+            <button type="button" class="contact-pill" data-contact-type="message">Just interested</button>
         </div>
 
         <form id="contactForm" class="contact-form contact-grid">
@@ -347,7 +309,6 @@
 
             <div class="contact-actions contact-field--full">
                 <button type="submit" class="hero-btn contact-btn--primary contact-submit">Send message</button>
-                <a class="hero-btn contact-btn--primary" href="https://calendly.com/asheerin97/30min" target="_blank" rel="noreferrer">Open scheduler</a>
             </div>
 
 
@@ -453,6 +414,9 @@
     </p>
 </div>
 
+<script src="https://www.youtube.com/iframe_api"></script>
+
+
 <script>
 function openModal(id) {
     document.getElementById("modalOverlay").classList.add("show");
@@ -501,6 +465,18 @@ function closeModal() {
 </script>
 
 <script>
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.ENDED) {
+        ytPlayer.seekTo(0, true);
+        ytPlayer.playVideo();
+      }
+    }
+</script>
+
+
+</script>
+
+<script>
 document.getElementById("contactForm").addEventListener("submit", async function(e) {
     e.preventDefault();  // prevent page reload
 
@@ -535,83 +511,55 @@ document.getElementById("contactForm").addEventListener("submit", async function
 </script>
 
 <script>
-// Lazy-load the large MP4 only on user intent (click/keyboard).
-(function() {
-    const shell = document.getElementById('swptVideoShell');
-    const video = document.getElementById('swptVideo');
-    if (!shell || !video) return;
+let ytPlayer;
+const YOUTUBE_VIDEO_ID = "Ye_X45jQgZY"; // <-- replace
 
-    const ensureLoaded = () => {
-        if (!video.src) {
-            const src = video.getAttribute('data-src');
-            if (src) video.src = src;
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player("swptYoutubePlayer", {
+    videoId: YOUTUBE_VIDEO_ID,
+    playerVars: {
+      autoplay: 0,
+      controls: 1,
+      modestbranding: 1,
+      rel: 0,
+      playsinline: 1,
+      loop: 1,
+      playlist: YOUTUBE_VIDEO_ID
+    },
+    events: {
+      onReady: onPlayerReady
+    }
+  });
+}
 
-            // Optional poster support (add data-poster on the video tag later)
-            const poster = video.getAttribute('data-poster');
-            if (poster && !video.poster) video.poster = poster;
-        }
-    };
+function onPlayerReady() {
+  const shell = document.getElementById("swptVideoShell");
 
-    const safeSeek = async (seconds) => {
-        ensureLoaded();
+  const playVideo = () => {
+    shell.classList.add("is-playing");
+    ytPlayer.playVideo();
+  };
 
-        // If metadata isn't ready yet, wait for it.
-        if (video.readyState < 1) {
-            await new Promise((resolve) => {
-                const onMeta = () => {
-                    video.removeEventListener('loadedmetadata', onMeta);
-                    resolve();
-                };
-                video.addEventListener('loadedmetadata', onMeta);
-            });
-        }
+  shell.addEventListener("click", playVideo);
+  shell.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      playVideo();
+    }
+  });
 
-        try {
-            video.currentTime = Math.max(0, seconds);
-        } catch (_) {
-            // Some browsers can throw if seeking before metadata; handled above.
-        }
-    };
-
-    const loadAndPlay = async () => {
-        ensureLoaded();
-        shell.classList.add('is-playing');
-        try {
-            await video.play();
-        } catch (_) {
-            // Autoplay may be blocked; user can press play in controls.
-        }
-    };
-
-    // Click anywhere on the shell to load+play
-    shell.addEventListener('click', loadAndPlay);
-    shell.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            loadAndPlay();
-        }
+  document.querySelectorAll(".chapter-chip[data-seek]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const sec = Number(btn.dataset.seek) || 0;
+      shell.classList.add("is-playing");
+      ytPlayer.seekTo(sec, true);
+      ytPlayer.playVideo();
+      shell.scrollIntoView({ behavior: "smooth", block: "center" });
     });
-
-    // If user hits the native play button directly, ensure src is set.
-    video.addEventListener('play', () => {
-        ensureLoaded();
-        shell.classList.add('is-playing');
-    });
-
-    // Chapters
-    document.querySelectorAll('.chapter-chip[data-seek]').forEach((btn) => {
-        btn.addEventListener('click', async () => {
-            const sec = parseFloat(btn.getAttribute('data-seek') || '0') || 0;
-            // Load, seek, then play
-            await safeSeek(sec);
-            await loadAndPlay();
-
-            // Keep the video in view
-            shell.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-    });
-})();
+  });
+}
 </script>
+
 
 <script>
 // Mobile menu + smooth scrolling (header offset)
