@@ -14,7 +14,7 @@
 <header class="home-header" role="banner" aria-label="SWPT header">
     <a href="#top" class="home-link home-brand" onclick="event.preventDefault(); window.scrollTo({top:0, behavior: 'smooth'});" aria-label="SWPT home">
         <img src="../static/images/swpt-logo-cropped.png" alt="SWPT Logo" class="home-logo">
-        <span class="home-title">Storm Water Pollution Tracker</span>
+        <span class="home-title">Stormwater Pollution Tracker</span>
     </a>
 
     <!-- Desktop nav (shows on larger screens) -->
@@ -75,7 +75,7 @@
         <div class="hero-badge">
             <!-- Simple sparkle mark so we don't need new icon libraries here -->
             <span class="hero-badge__icon" aria-hidden="true">✦</span>
-            SaaS Platform • SWPT = Storm Water Pollution Tracker
+            SaaS Platform • SWPT = Stormwater Pollution Tracker
         </div>
 
         <h1 class="hero-title hero-title--saas">Cleaner water starts with smarter street sweeping.</h1>
@@ -343,7 +343,7 @@
             </label>
 
             <!-- Keep Subject for your existing handler; we set it automatically via JS below -->
-            <input type="hidden" name="Subject" id="subjectField" value="SWPT (Storm Water Pollution Tracker) – Schedule a demo">
+            <input type="hidden" name="Subject" id="subjectField" value="SWPT (Stormwater Pollution Tracker) – Schedule a demo">
 
             <div class="contact-actions contact-field--full">
                 <button type="submit" class="hero-btn contact-btn--primary contact-submit">Send message</button>
@@ -476,7 +476,7 @@ function closeModal() {
     const subjectField = document.getElementById('subjectField');
 
     const computeSubject = (type) => {
-        const prefix = 'SWPT (Storm Water Pollution Tracker)';
+        const prefix = 'SWPT (Stormwater Pollution Tracker)';
         if (type === 'pilot') return `${prefix} – Pilot request`;
         if (type === 'message') return `${prefix} – Message`;
         return `${prefix} – Schedule a demo`;
