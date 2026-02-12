@@ -516,7 +516,7 @@ a.primary {
 
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/static/images/asphalt-background.jpg');
+    url('images/asphalt-background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -967,7 +967,7 @@ button.hero-btn {
   background-color: var(--swpt-slate-dark);
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)),
-    url('/static/images/road-network-background.jpg');
+    url('images/road-network-background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1139,7 +1139,7 @@ button.hero-btn {
 .impact-section {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
-    url('/static/images/clean-water-background.jpg');
+    url('images/clean-water-background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
