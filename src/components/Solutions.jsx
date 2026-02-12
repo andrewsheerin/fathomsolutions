@@ -74,11 +74,11 @@ function IconDroplet(props) {
   );
 }
 
-function IconRecycle(props) {
+function IconLeaf(props) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
-        d="M7.5 7.5 10 3h4l2.5 4.5"
+        d="M21 3s-7.4 1-11.2 4.8C6 11.6 6 18 6 18s6.4 0 10.2-3.8C20 10.4 21 3 21 3Z"
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
@@ -86,15 +86,7 @@ function IconRecycle(props) {
         strokeLinejoin="round"
       />
       <path
-        d="M20 10.5 22 14l-2 3.5h-5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4 13.5 2 10l2-3.5h5"
+        d="M9 15c2-2 4.5-3.9 8-6"
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
@@ -107,37 +99,37 @@ function IconRecycle(props) {
 
 const solutions = [
   {
-    title: 'Data analytics',
+    title: 'Data Analytics',
     icon: IconChart,
-    body: 'Turn complex datasets into clear, actionable insights for planning and policy.',
+    body: 'Turn complex datasets into clear, decision-ready outputs. I build analytical workflows that support scenario testing, infrastructure planning, regulatory reporting, and long-term environmental strategy, not just static dashboards.',
   },
   {
-    title: 'GIS specialist',
+    title: 'GIS & Spatial Analysis',
     icon: IconMapPin,
-    body: 'Spatial analysis, mapping, and geoprocessing to understand place-based impacts.',
+    body: 'Spatial modeling, raster and vector workflows, and environmental overlays that quantify place-based impacts. From watershed-scale analysis to street-level resolution, I use geospatial tools to connect data to geography.',
   },
   {
-    title: 'Web-app development',
+    title: 'Web Application Development',
     icon: IconLayout,
-    body: 'Lightweight, purpose-built tools that put your data to work for stakeholders.',
+    body: 'Custom, lightweight tools that make environmental models accessible and usable. I design and develop focused applications that are fast, maintainable, and built around real workflows, not generic software.',
   },
   {
-    title: 'Hydrological modeling',
+    title: 'Hydrological Modeling',
     icon: IconDroplet,
-    body: 'Simulate water and pollutant transport through runoff, drainage networks, and groundwater flow.',
+    body: 'Surface runoff, groundwater flow, pollutant transport, and climate-driven hydrologic change. I build models that help evaluate infrastructure performance and environmental risk under real-world conditions.',
   },
   {
-    title: 'Life cycle assessment',
-    icon: IconRecycle,
-    body: 'Calculate environmental impacts of products and processes across the full life cycle.',
+    title: 'Life Cycle Assessment',
+    icon: IconLeaf,
+    body: 'Infrastructure and materials analysis across the full life cycle, from extraction and construction through maintenance and end-of-life. I develop LCA tools that support transparent comparison and sustainable decision-making.',
   },
 ];
 
-function useIsMobile(breakpointPx = 860) {
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= breakpointPx);
+function useIsMobile(breakpointPx = 768) {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < breakpointPx);
 
   useEffect(() => {
-    const mq = window.matchMedia(`(max-width: ${breakpointPx}px)`);
+    const mq = window.matchMedia(`(max-width: ${breakpointPx - 1}px)`);
     const onChange = () => setIsMobile(mq.matches);
     onChange();
 
@@ -154,41 +146,37 @@ function useIsMobile(breakpointPx = 860) {
 }
 
 export default function Solutions({ id }) {
-  const isMobile = useIsMobile(860);
+  const isMobile = useIsMobile(768);
   const prefersReducedMotion = useMemo(
     () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     []
   );
 
   const cardRefs = useRef([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [visibleMap, setVisibleMap] = useState(() => ({}));
 
   useEffect(() => {
     if (!isMobile) return;
+    if (prefersReducedMotion) return;
+
     const nodes = cardRefs.current.filter(Boolean);
     if (!nodes.length) return;
 
-    if (prefersReducedMotion) {
-      setActiveIndex(0);
-      return;
-    }
-
     const io = new IntersectionObserver(
       (entries) => {
-        // pick the most visible/closest-to-center entry as active
-        const candidates = entries
-          .filter((e) => e.isIntersecting)
-          .map((e) => ({
-            idx: Number(e.target.getAttribute('data-idx')),
-            ratio: e.intersectionRatio,
-          }))
-          .sort((a, b) => b.ratio - a.ratio);
-
-        if (candidates[0]) setActiveIndex(candidates[0].idx);
+        setVisibleMap((prev) => {
+          const next = { ...prev };
+          for (const e of entries) {
+            const key = e.target.getAttribute('data-key');
+            if (!key) continue;
+            next[key] = e.isIntersecting;
+          }
+          return next;
+        });
       },
       {
-        threshold: [0.25, 0.4, 0.55, 0.7, 0.85],
-        rootMargin: '-35% 0px -45% 0px',
+        rootMargin: '0px 0px -15% 0px',
+        threshold: 0.18,
       }
     );
 
@@ -200,11 +188,11 @@ export default function Solutions({ id }) {
     <section id={id} className="section section-light solutions-section">
       <div className="container">
         <header className="section-lead">
-          <h2>Solutions we deliver</h2>
+          <h2>Solutions We Deliver</h2>
           <p className="lead-sub">Practical expertise to move projects from data to decision.</p>
         </header>
 
-        {/* Desktop / large screens: keep the grid */}
+        {/* Desktop / tablet grid */}
         {!isMobile && (
           <div className="solutions-grid" aria-label="Solutions list">
             {solutions.map((s) => {
@@ -224,39 +212,28 @@ export default function Solutions({ id }) {
           </div>
         )}
 
-        {/* Mobile: focused/scroll-activated accordion */}
+        {/* Mobile: IntersectionObserver scroll reveal */}
         {isMobile && (
           <div className="solutions-mobile" aria-label="Solutions list">
             {solutions.map((s, idx) => {
               const SolutionIcon = s.icon;
-              const isActive = idx === activeIndex;
+              const isVisible = prefersReducedMotion ? true : Boolean(visibleMap[s.title]);
               return (
                 <article
                   key={s.title}
-                  className={isActive ? 'solution-card is-active' : 'solution-card'}
-                  data-idx={idx}
+                  className={isVisible ? 'solution-card is-visible' : 'solution-card'}
+                  data-key={s.title}
                   ref={(el) => {
                     cardRefs.current[idx] = el;
                   }}
                 >
-                  <button
-                    type="button"
-                    className="solution-toggle"
-                    aria-expanded={isActive}
-                    onClick={() => setActiveIndex(idx)}
-                  >
+                  <div className="solution-head">
                     <span className="solution-icon" aria-hidden="true">
                       <SolutionIcon className="solution-icon-svg" />
                     </span>
-                    <span className="solution-title">{s.title}</span>
-                    <span className="solution-chevron" aria-hidden="true">
-                      ▾
-                    </span>
-                  </button>
-
-                  <div className="solution-body" hidden={!isActive}>
-                    <p>{s.body}</p>
+                    <h3>{s.title}</h3>
                   </div>
+                  <p>{s.body}</p>
                 </article>
               );
             })}

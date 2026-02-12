@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useMemo, useState } from 'react';
 
 function MailIcon(props) {
   return (
@@ -49,8 +49,14 @@ function LinkedInIcon(props) {
   );
 }
 
-export default function Footer({ id }) {
+export default function Footer({ id, onNavigate }) {
   const [toast, setToast] = useState(null);
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+  const formId = useId();
+
+  // NOTE: Replace with your real Formspree endpoint (or another form backend).
+  // Example: https://formspree.io/f/xxxxxxx
+  const formEndpoint = useMemo(() => 'https://formspree.io/f/REPLACE_ME', []);
 
   useEffect(() => {
     if (!toast) return;
@@ -72,20 +78,111 @@ export default function Footer({ id }) {
     setToast(label);
   };
 
+  const submit = async (e) => {
+    e.preventDefault();
+    if (status === 'sending') return;
+
+    setStatus('sending');
+    const form = e.currentTarget;
+
+    try {
+      const fd = new FormData(form);
+      // Honeypot field: bots will often fill it.
+      const hp = fd.get('company');
+      if (hp) {
+        setStatus('success');
+        form.reset();
+        return;
+      }
+
+      const res = await fetch(formEndpoint, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: fd,
+      });
+
+      if (!res.ok) throw new Error('Request failed');
+
+      setStatus('success');
+      form.reset();
+    } catch {
+      setStatus('error');
+    }
+  };
+
   const year = new Date().getFullYear();
 
   return (
     <footer id={id} className="site-footer">
       <div className="container footer-inner">
-        <div className="footer-brand" aria-label="Fathom Solutions">
+        <button
+          type="button"
+          className="footer-brand"
+          aria-label="Back to top"
+          onClick={() => onNavigate && onNavigate('top')}
+        >
           <img src="/images/inset_O_logo_white.png" alt="Fathom Solutions Logo" />
-        </div>
+        </button>
 
         <p className="footer-tagline">Technical solutions for environmental resilience.</p>
 
         <hr className="footer-sep" aria-hidden="true" />
 
         <div className="footer-grid">
+          <form className="contact-form" onSubmit={submit} aria-label="Send a message">
+            <div className="contact-form-grid">
+              <div className="field">
+                <label htmlFor={`${formId}-name`}>Name</label>
+                <input id={`${formId}-name`} name="name" type="text" autoComplete="name" required />
+              </div>
+
+              <div className="field">
+                <label htmlFor={`${formId}-email`}>Email</label>
+                <input
+                  id={`${formId}-email`}
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                />
+              </div>
+
+              {/* Honeypot */}
+              <div className="field hp" aria-hidden="true">
+                <label htmlFor={`${formId}-company`}>Company</label>
+                <input id={`${formId}-company`} name="company" type="text" tabIndex={-1} autoComplete="off" />
+              </div>
+
+              <div className="field field--full">
+                <label htmlFor={`${formId}-message`}>Message</label>
+                <textarea id={`${formId}-message`} name="message" rows={5} required />
+              </div>
+            </div>
+
+            <div className="contact-actions">
+              <button type="submit" className="btn-primary" disabled={status === 'sending'}>
+                {status === 'sending' ? 'Sending…' : 'Send message'}
+              </button>
+
+              <a
+                href="https://calendly.com/asheerin97/30min"
+                target="_blank"
+                rel="noopener"
+                className="btn-secondary"
+              >
+                Schedule a meeting
+              </a>
+
+              {status === 'success' && <p className="form-status ok">Message sent. I’ll get back to you soon.</p>}
+              {status === 'error' && (
+                <p className="form-status err">
+                  Something went wrong. You can email{' '}
+                  <a href="mailto:support@fathomsolutions.dev">support@fathomsolutions.dev</a>.
+                </p>
+              )}
+            </div>
+          </form>
+
           <div className="footer-contact" aria-label="Contact methods">
             <button
               type="button"
@@ -118,19 +215,14 @@ export default function Footer({ id }) {
               <LinkedInIcon className="footer-icon" />
             </a>
           </div>
-
-          <a
-            href="https://calendly.com/asheerin97/30min"
-            target="_blank"
-            rel="noopener"
-            className="btn-primary footer-cta"
-          >
-            Schedule a Meeting
-          </a>
         </div>
 
         <div className="footer-bottom">
           <small>© {year} Fathom Solutions. All rights reserved.</small>
+
+          <button type="button" className="to-top" onClick={() => onNavigate && onNavigate('top')} aria-label="Back to top">
+            ↑
+          </button>
         </div>
       </div>
 

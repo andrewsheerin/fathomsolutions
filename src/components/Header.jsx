@@ -73,16 +73,6 @@ export default function Header({ visible, onNavigate, sectionIds }) {
             ))}
           </ul>
         </nav>
-
-        <a
-          href="https://calendly.com/asheerin97/30min"
-          target="_blank"
-          rel="noopener"
-          className="btn-primary mobile-menu-cta"
-          onClick={() => setOpen(false)}
-        >
-          Schedule a Meeting
-        </a>
       </div>
     </div>
   ) : null;
@@ -119,15 +109,6 @@ export default function Header({ visible, onNavigate, sectionIds }) {
             ))}
           </ul>
         </nav>
-
-        <a
-          href="https://calendly.com/asheerin97/30min"
-          target="_blank"
-          rel="noopener"
-          className="btn-primary site-cta"
-        >
-          Schedule a Meeting
-        </a>
 
         <button
           className="mobile-menu-btn"

@@ -6,7 +6,7 @@ const projects = [
     title: 'SWPT',
     description:
       'Data-driven SaaS for municipalities to optimize street sweeping and reduce stormwater pollution.',
-    href: '/SWPT',
+    href: `${import.meta.env.BASE_URL}SWPT/`,
     cta: 'Learn more',
     tags: ['Stormwater', 'SaaS', 'Municipal'],
     image: '/images/street_sweeper.jpeg',
@@ -49,13 +49,13 @@ export default function Projects({ id }) {
 
   const cardRefs = useRef([]);
   const [visibleMap, setVisibleMap] = useState(() => ({}));
+  const [openId, setOpenId] = useState(null);
 
   useEffect(() => {
     const nodes = cardRefs.current.filter(Boolean);
     if (!nodes.length) return;
 
     if (prefersReducedMotion) {
-      // show everything immediately
       const all = {};
       nodes.forEach((n) => {
         all[n.getAttribute('data-key')] = true;
@@ -77,7 +77,6 @@ export default function Projects({ id }) {
         });
       },
       {
-        // Reveal a bit before the card hits the viewport and fade out shortly after it leaves
         rootMargin: '10% 0px -20% 0px',
         threshold: 0.15,
       }
@@ -86,6 +85,12 @@ export default function Projects({ id }) {
     nodes.forEach((n) => io.observe(n));
     return () => io.disconnect();
   }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    // If a card scrolls out of view, close it so the list stays tidy.
+    if (!openId) return;
+    if (visibleMap[openId] === false) setOpenId(null);
+  }, [openId, visibleMap]);
 
   return (
     <section id={id} className="section section-dark projects-section">
@@ -97,23 +102,28 @@ export default function Projects({ id }) {
 
         <div className="projects-grid" aria-label="Project list">
           {projects.map((p, idx) => {
-            const Tag = p.href ? 'a' : 'div';
-            const tagProps = p.href
-              ? { href: p.href, target: p.href.startsWith('http') ? '_blank' : undefined, rel: 'noopener' }
-              : {};
-
+            const isExternal = Boolean(p.href && /^https?:\/\//i.test(p.href));
             const isVisible = visibleMap[p.id] ?? false;
+            const isOpen = openId === p.id;
 
             return (
               <article
-                className={isVisible ? 'project-card is-visible' : 'project-card'}
+                className={
+                  `${isVisible ? 'project-card is-visible' : 'project-card'}${isOpen ? ' is-open' : ''}`
+                }
                 key={p.id}
                 data-key={p.id}
                 ref={(el) => {
                   cardRefs.current[idx] = el;
                 }}
               >
-                <Tag className="project-card-link" {...tagProps} aria-label={p.title}>
+                <button
+                  type="button"
+                  className="project-card-link"
+                  aria-label={p.title}
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenId((prev) => (prev === p.id ? null : p.id))}
+                >
                   <div className="project-bg" style={{ backgroundImage: `url(${p.image})` }} aria-hidden="true" />
                   <div className="project-inner">
                     <h3 className="project-title">{p.title}</h3>
@@ -126,12 +136,24 @@ export default function Projects({ id }) {
                           </span>
                         ))}
                       </div>
-                      <span className={`btn-primary project-cta ${p.href ? '' : 'is-disabled'}`}>
-                        {p.cta}
-                      </span>
+
+                      {p.href ? (
+                        <a
+                          className="btn-primary project-cta"
+                          href={p.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {p.cta}
+                        </a>
+                      ) : (
+                        <span className="btn-primary project-cta is-disabled">{p.cta}</span>
+                      )}
+
                     </div>
                   </div>
-                </Tag>
+                </button>
               </article>
             );
           })}

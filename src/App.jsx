@@ -63,6 +63,7 @@ export default function App() {
           id={SECTION_IDS.home}
           onPrimary={() => requestScrollTo(SECTION_IDS.projects)}
           onSecondary={() => requestScrollTo(SECTION_IDS.contact)}
+          onScrollHint={() => requestScrollTo(SECTION_IDS.about)}
         />
 
         <About id={SECTION_IDS.about} />
@@ -70,7 +71,7 @@ export default function App() {
         <Projects id={SECTION_IDS.projects} />
       </main>
 
-      <Footer id={SECTION_IDS.contact} />
+      <Footer id={SECTION_IDS.contact} onNavigate={(id) => requestScrollTo(id)} />
     </>
   );
 }

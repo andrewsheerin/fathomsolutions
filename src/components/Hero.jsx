@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Hero({ id, onPrimary, onSecondary }) {
+export default function Hero({ id, onPrimary, onSecondary, onScrollHint }) {
   return (
     <section id={id} className="hero" aria-label="Hero">
       <div className="hero-bg" aria-hidden="true" />
@@ -23,6 +23,18 @@ export default function Hero({ id, onPrimary, onSecondary }) {
           </div>
         </div>
       </div>
+
+      <button
+        type="button"
+        className="hero-scroll-hint"
+        onClick={onScrollHint}
+        aria-label="Scroll to learn more"
+      >
+        <span className="hero-scroll-hint__label">Learn more</span>
+        <span className="hero-scroll-hint__chevron" aria-hidden="true">
+          ↓
+        </span>
+      </button>
     </section>
   );
 }
