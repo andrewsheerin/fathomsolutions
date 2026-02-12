@@ -1,0 +1,139 @@
+/* Global tokens + reset (adapted from existing styles.css) */
+
+:root {
+  --c-header: #afc6d4;
+  --c-cta: #afc6d4;
+  --c-dark-bg: #182831;
+  --c-light-bg: #e8f0f5;
+  --c-text-light: #ffffff;
+  --c-text-dark: #002946;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --header-h: 84px;
+  --layout-max-width: 1120px;
+  --layout-padding-x: clamp(16px, 4vw, 32px);
+
+  --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 18px 40px rgba(0, 0, 0, 0.22);
+
+  scroll-padding-top: var(--header-h);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, sans-serif;
+  color: var(--c-text-dark);
+  background: #f5f9fb;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body.is-menu-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.container {
+  width: min(var(--layout-max-width), calc(100% - 2 * var(--layout-padding-x)));
+  margin: 0 auto;
+}
+
+.section {
+  padding: clamp(56px, 7vw, 96px) 0;
+}
+
+.section-dark {
+  background: var(--c-dark-bg);
+  color: var(--c-text-light);
+}
+
+.section-light {
+  background: var(--c-light-bg);
+}
+
+.section-lead h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.7rem, 2.2vw + 1.1rem, 2.5rem);
+}
+
+.lead-sub {
+  margin: 0;
+  opacity: 0.9;
+  max-width: 72ch;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 12px 18px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary {
+  background: var(--c-cta);
+  color: #052233;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn-secondary {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--c-text-light);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(175, 198, 212, 0.65);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -637,7 +637,7 @@ a.primary {
   background: rgba(0, 104, 231, 0.18);
   border: 1px solid rgba(0, 104, 231, 0.28);
   color: rgba(255, 255, 255, 0.92);
-  font-size: clamp(0.5rem, 0.4vw + 0.75rem, 0.6rem);
+  font-size: clamp(0.7rem, 0.4vw + 0.75rem, 0.6rem);
   font-weight: 750;
   letter-spacing: 0.02em;
   margin: 0 auto 14px;
