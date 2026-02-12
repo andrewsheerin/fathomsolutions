@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:pages": "vite build && node scripts/copy-cname.mjs",
+    "build:pages": "vite build && node scripts/copy-cname.mjs && node scripts/copy-swpt.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -18,4 +18,3 @@
     "vite": "^5.4.2"
   }
 }
-
