@@ -21,6 +21,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -28,11 +31,9 @@ jobs:
           cache: npm
 
       - name: Install
-        run: npm ci
+        run: npm ci || npm install
 
       - name: Build
-        env:
-          GITHUB_PAGES_REPO: ${{ github.event.repository.name }}
         run: npm run build
 
       # SPA fallback for GitHub Pages (serves 404.html for unknown routes)
