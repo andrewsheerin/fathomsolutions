@@ -728,22 +728,6 @@ a:focus-visible,
   z-index: 0;
 }
 
-/* Gradients by project type */
-.project-card[data-project="swpt"] {
-  background: linear-gradient(135deg, #0f1a20 0%, #123042 100%);
-}
-
-.project-card[data-project="lca"] {
-  background: linear-gradient(135deg, #0f1a20 0%, #1a3e4f 100%);
-}
-
-.project-card[data-project="wind"] {
-  background: linear-gradient(135deg, #0f1a20 0%, #224a5c 100%);
-}
-
-.project-card.project-github {
-  background: linear-gradient(135deg, #0f1a20 0%, #2b5667 100%);
-}
 
 /* Hover “pop” */
 .project-card:hover,

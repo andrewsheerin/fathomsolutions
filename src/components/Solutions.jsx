@@ -97,6 +97,21 @@ function IconLeaf(props) {
   );
 }
 
+function IconWind(props) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path
+        d="M4 12h16M4 6h16M4 18h10"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 const solutions = [
   {
     title: 'Data Analytics',
@@ -122,6 +137,11 @@ const solutions = [
     title: 'Life Cycle Assessment',
     icon: IconLeaf,
     body: 'Infrastructure and materials analysis across the full life cycle, from extraction and construction through maintenance and end-of-life. I develop LCA tools that support transparent comparison and sustainable decision-making.',
+  },
+  {
+     title: 'Weather Forecasting and Analysis',
+     icon: IconWind,
+     body: 'Historical and forecast weather data extraction, visualization, and analysis. I build tools that make it easy to access and interpret meteorological data for any location, with exportable summaries to support decision-making.',
   },
 ];
 
