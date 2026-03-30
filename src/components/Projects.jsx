@@ -56,7 +56,7 @@ const projects = [
     id: 'cartox',
     title: 'Cartox.io',
     description: 'Test your geography knowledge through interactive map-based games. Explore countries of the world for now, but expect more fun games soon.',
-    href: 'https://cartox-io.onrender.com',
+    href: 'https://andrewsheerin.github.io/cartox.io/',
     cta: 'Visit Site',
     tags: ['Geography games', 'Learning'],
     image: '/images/cartox-github.png',
