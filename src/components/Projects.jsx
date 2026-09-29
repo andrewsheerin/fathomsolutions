@@ -6,7 +6,7 @@ const projects = [
     title: 'SWPT',
     description:
       'Data-driven SaaS for municipalities to optimize street sweeping and reduce stormwater pollution.',
-    href: `${import.meta.env.BASE_URL}SWPT/`,
+    href: 'https://swpt.dev',
     cta: 'Visit site',
     tags: ['Stormwater', 'SaaS', 'Municipal'],
     image: '/images/street_sweeper.jpeg',

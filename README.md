@@ -19,5 +19,5 @@ npm run preview
 ## Notes
 
 - Static assets live in `static/` and are referenced as `/static/...`.
-- The `/SWPT` folder remains a separate static sub-site.
+- SWPT now lives at https://swpt.dev. The build writes redirect pages at `/SWPT/` and `/swpt/` so old links keep working (`scripts/write-swpt-redirect.mjs`).
 
