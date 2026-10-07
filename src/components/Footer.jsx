@@ -165,7 +165,7 @@ export default function Footer({ id, onNavigate }) {
               </button>
 
               <a
-                href="https://calendly.com/asheerin97/30min"
+                href="https://calendly.com/asheerin-fathomsolutions/30min"
                 target="_blank"
                 rel="noopener"
                 className="btn-secondary"
