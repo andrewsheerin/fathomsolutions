@@ -184,7 +184,7 @@ export default function Footer({ id, onNavigate }) {
               {status === 'error' && (
                 <p className="form-status err">
                   Something went wrong. You can email{' '}
-                  <a href="mailto:support@fathomsolutions.dev">support@fathomsolutions.dev</a>.
+                  <a href="mailto:asheerin@fathomsolutions.dev">asheerin@fathomsolutions.dev</a>.
                 </p>
               )}
             </div>
@@ -204,7 +204,7 @@ export default function Footer({ id, onNavigate }) {
             <button
               type="button"
               className="footer-link"
-              onClick={() => copy('support@fathomsolutions.dev', 'Email copied')}
+              onClick={() => copy('asheerin@fathomsolutions.dev', 'Email copied')}
               aria-label="Copy email address"
               title="Copy email"
             >
