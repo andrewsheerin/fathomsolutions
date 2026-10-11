@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useMemo, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 
 function MailIcon(props) {
   return (
@@ -54,9 +54,9 @@ export default function Footer({ id, onNavigate }) {
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
   const formId = useId();
 
-  // NOTE: Replace with your real Formspree endpoint (or another form backend).
-  // Example: https://formspree.io/f/xxxxxxx
-  const formEndpoint = useMemo(() => 'https://formspree.io/f/REPLACE_ME', []);
+  // Messages go through the SWPT contact API, which mails them to the Fathom inbox labelled
+  // "Fathom Solutions". That API allows this site's origin (SWPT F-162).
+  const formEndpoint = 'https://swpt.dev/api/contact';
 
   useEffect(() => {
     if (!toast) return;
@@ -97,8 +97,15 @@ export default function Footer({ id, onNavigate }) {
 
       const res = await fetch(formEndpoint, {
         method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: fd,
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'fathom',
+          contact_type: 'message',
+          name: fd.get('name') || '',
+          email: fd.get('email') || '',
+          organization: '',
+          message: fd.get('message') || '',
+        }),
       });
 
       if (!res.ok) throw new Error('Request failed');
